@@ -1,0 +1,29 @@
+<h1>Category page</h1>
+<ul>
+   <li><a href="{% url 'home:index' %}">Back</a></li>
+</ul>
+
+<!-- Form Nhap lieu-->
+{% if id == None %}
+   <form action="{% url 'category:index' %}" method="post">
+{% else %}
+   <form action="{% url 'category:update' id=id %}" method="post">
+{% endif %}
+   {% csrf_token %}
+   {{ form }}
+   <input type="submit" value="Submit" />
+</form>
+
+<!--Bang hien thi-->
+{% if list_item|length %}
+<table border=1 style="width: 100%; border-collapse: collapse">
+   {% for item in list_item %}
+   <tr>
+       <td>{{ item.title }}</td>
+       <td>{{ item.order }}</td>
+       <td><a href="{% url 'category:update' id=item.id %}">Edit</a></td>
+       <td><a href="{% url 'category:remove' id=item.id %}">Remove</a></td>
+   </tr>
+   {% endfor %}
+</table>
+{% endif %}

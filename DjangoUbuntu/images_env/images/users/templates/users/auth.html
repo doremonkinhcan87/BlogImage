@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+    <link href=http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css rel="stylesheet">
+</head>
+<body>
+	<div >
+		<h1>Wellcome Website Auth</h1>
+		<form action="{% url 'users:auth'%}" method="post">
+			{% csrf_token %}
+		
+			<input type="text" name="email" placeholder="Email..."/>
+			<input type="text" name="password" placeholder="Password..."/>
+			<input type="submit" value="Submit" />
+		</form>
+		<h1>{{error_massage}}</h1>
+		
+	</div>
+</body>
+</html>
