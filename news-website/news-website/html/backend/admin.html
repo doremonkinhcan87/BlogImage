@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html" charset="utf-8"/>
+	<title>Index - KhanhSpring.com</title>
+	<script type="text/javascript" src="../../js/jquery-2.0.2.min.js"></script>
+	<link href="../../css/admin-style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="header">
+	<div id="logo">
+		<a href="#">KHANHSPRING</a>
+	</div>
+	<div id="user-bar">
+		<div id="user-option">
+			<a id="user-info" href="#">
+				<img src="../../upload/avatar/user.jpg">
+				<span>Administrator</span>
+			</a>
+			<ul>
+				<li><a href="#">Trang cá nhân</a></li>
+				<li><a href="#">Tạm khóa</a></li>
+				<li><a href="#">Đăng xuất</a></li>
+			</ul>
+		</div>
+	</div>
+</div><!--end #header-->
+
+<div id="container">
+	<div id="sidebar-menu">
+		<ul id="menu">
+			<li><a href="#">Dashboard</a></li>
+			<li><a class="super-menu" href="#">Post</a>
+				<ul>
+					<li><a href="#"><em>1</em>Danh sách Post</a></li>
+					<li><a href="#"><em>2</em>Thêm mới</a></li>
+					<li><a href="#"><em>3</em>Thể loại</a></li>
+				</ul>
+			</li>
+			<li><a class="super-menu" href="#">Pages</a>
+				<ul>
+					<li><a href="#"><em>1</em>Danh sách Page</a></li>
+					<li><a href="#"><em>2</em>Thêm mới</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Comments</a></li>
+			<li><a class="super-menu" href="#">Users</a>
+				<ul>
+					<li><a href="#"><em>1</em>Danh sách User</a></li>
+					<li><a href="#"><em>2</em>Thêm mới</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Cấu hình Website</a></li>
+		</ul>
+	</div><!--end #sidebar-menu-->
+
+	<div id="admin-content">
+		<h2 class="admin-title">Tiêu đề trang admin</h2>
+
+		<div class="main-content-wrap">
+			<div class="main-content">
+				<div class="add-new-wrap">
+					<h3 class="form-title">Thông tin đối tượng</h3>
+					<form>
+					<table class="add-new-table">
+						<tr>
+							<td>Thuộc tính 1</td>
+							<td>
+								<input class="txt-form" type="text" name="name1" value="" placeholder="Ghi chú cho thuộc tính 1..."/>
+							</td>
+						</tr>
+						<tr>
+							<td>Thuộc tính 2</td>
+							<td>
+								<input class="txt-form" type="text" name="name2" value="" placeholder="Ghi chú cho thuộc tính 2..."/>
+							</td>
+						</tr>
+						<tr>
+							<td>Thuộc tính 3</td>
+							<td>
+								<select class="cbb-form" name="name3">
+									<option value="0">---Option Default---</option>
+									<option value="1">Option 1</option>
+									<option value="2">Option 2</option>
+									<option value="3">Option 3</option>
+									<option value="4">Option 4</option>
+									<option value="5">Option 5</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Thuộc tính 4</td>
+							<td>
+								<input class="txt-form" type="text" name="name4" value="" placeholder="Ghi chú cho thuộc tính 4..."/>
+							</td>
+						</tr>
+						<tr>
+							<td>Thuộc tính 5</td>
+							<td>
+								<label><input type="radio" name="name5" value="1"/> Giá trị 5.1</label>
+								<label><input type="radio" name="name5" value="2"/> Giá trị 5.2</label>
+							</td>
+						</tr>
+						<tr>
+							<td>Thuộc tính 6</td>
+							<td>
+								<input class="txt-form" type="text" name="name6" value="" placeholder="Ghi chú cho thuộc tính 6..."/>
+							</td>
+						</tr><tr>
+							<td></td>
+							<td>
+								<input class="btn-form" type="submit" name="submit" value="Action"/>
+							</td>
+						</tr>
+					</table>
+					</form>
+				</div><!--end .add-new-wrap-->
+
+			</div><!--end .main-content-->
+		</div><!--end .main-content-wrap-->
+	</div><!--end #admin-content-->
+</div><!--end #container-->
+
+<div id="footer">
+	<h1>Design by: <a href="http://khanhspring.com">khanhspring.com</a></h1>
+</div><!--end #footer-->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".super-menu").click(function(){
+			$(this).parent().find("ul").slideToggle(100);
+			$(this).toggleClass("menu-item-opened");
+			return false;
+		});
+	});
+</script>
+</body>
+</html>

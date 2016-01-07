@@ -1,0 +1,359 @@
+Java Web với JSP/Servlet - Bài 0: Giới thiệu
+Chào mừng các bạn đến với loạt hướng bài xây dựng website sử dụng JSP/Servlet theo mô hình MVC của blog khánh spring.
+Giới thiệu về loạt bài
+Loạt bài hướng dẫn xây dựng website bằng JSP/Servlet theo mô hình MVC bao gồm các nội dung chính:
+- Phân tích hệ thống.
+- Thiết kế Database.
+- Thiết kế giao diện (HTML/CSS/JS).
+- Xây dựng website sử dụng JSP/Servlet.
+- Triển khai.
+Một số kiến thức cơ bản bạn cần có:
+- JSP/Servlet
+- JDBC
+- HTML/CSS
+- Mô hình MVC
+Nếu chưa biết về những phần này thì bạn nên tìm hiểu trước. Bạn có thể học qua một số trang web: tutorialspoint.com, w3schools.com, hoặc bạn có thể tìm loạt video hướng dẫn của blog StudyAndShare rất dễ hiểu về JSP/Servlet.
+
+
+Java Web với JSP/Servlet - Bài 1: Thiết lập môi trường, các công cụ lập trình
+Chào mừng các bạn đến với loạt hướng bài xây dựng website sử dụng JSP/Servlet theo mô hình MVC của blog khánh spring.
+Trong bài này mình sẽ hướng dẫn các bạn thiết lập môi trường trước khi bắt tay vào xây dựng hệ thống.
+
+#1 Setting up Java Development Kit (JDK)
+* Nếu máy bạn đã cài đặt JDK thì có thể bỏ qua bước này.
+Để có thể phát triển bất kỳ một ứng dụng nào trên nền tảng Java thì trước tiên chúng ta cần cài đặt JDK.
+Đây là bộ công cụ dành cho người phát triển ứng dụng bằng ngôn ngữ lập trình Java, bao gồm JRE và các công cụ hỗ trợ phát triển phần mềm (ví dụ như: trình biên dịch, trình thông dịch, trình sửa lỗi…). Mã nguồn trong file .java sẽ được trình biên dịch biển đổi thành file .class để thực thi trong JRE.
+Bạn có thể download JDK từ trang chủ của Oracle Java: <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java SE Downloads</a>.
+Sau khi tải về thành công. Kích đúp để cài đặt.
+
+#2 Eclipse IDE for Java EE Developers
+Trong loạt bài này chúng ta sẽ sử dụng Eclipse phiên bản dành cho Java EE đề lập trình.
+Tại thời điểm viết loạt bài này thì phiên bản mới nhất của Eclipse hỗ trợ Java EE là eclipse-jee-luna-SR2
+Bạn có thể download tại trang chủ của Eclipse: <a href="https://eclipse.org/downloads/">Eclipse Download</a>
+Lựa chọn Eclipse IDE for Java EE Developers phù hợp với hệ điều hành đang dùng.
+Sau khi tải về thành công bạn giải nén ra và có thể chạy luôn mà không cần cài đặt.
+
+#3 Setting up Web Server: Tomcat
+Trong loạt bài này chúng ta sẽ làm việc với Web Server là Tomcat.
+Hiện tại thì phiên bản mới nhất của Tomcat là 8.0.23.
+Để download Tomcat bạn vào trang chủ: <a href="http://tomcat.apache.org/">Apache Tomcat</a> tìm đến phần download lựa chọn phiên bản và tải về bản phù hợp với hệ điều hành đang dùng.
+Sau khi tải về thành công, bạn thực hiện giải nén để có thể sử dụng.
+
+#4 Cấu hình Eclipse, tạo một project demo
+Khởi động Eclipse và thiết lập server trong eclise:
+- Bạn vào thư mục Eclipse vừa giải nén. Chạy file eclipse.exe.
+- Chọn folder workspace (nơi chứa các project) -> OK
+- Sau khi khởi động thành công tìm đến Tab: Servers -> kích vào dòng: No server available. Click this... để thiết lập server.
+- Chọn Apache -> Lựa chọn phiên bản Tomcat phù hợp với bản Tomcat vừa tải -> Next
+- Browse... tới thu mục chứa Tomcat đã giải nén -> Finish.
+Như vậy là bạn đã thiết lập xong Server cho Eclipse.
+Bây giờ chúng ta sẽ tạo một project web demo:
+- Vào File -> New -> Dynamic Web Project
+- Điền tên project và chọn next -> next tiếp và tích chọn phần Genarate web.xml deployment desctiption (file web.xml là file xml để cấu hình cho một ứng dụng web java).
+- Chọn Finish và bạn đã tạo thành công một Project Java Web.
+Cấu trúc của một Project Java Web bao gồm: 
+- Phần src nằm trong Java Resources chứa các mã nguồn Java
+- Phần WebContent chứa các tài nguyên khác của ứng dụng web: các file html, jsp, css, js, hình ảnh,...
+- Trong WebContent có thư mục WEB-INF chứa file web.xml và thư mục lib đây là thư mục chứa các thư viện java (các file .rar) cần dùng.
+
+#5 Công cụ quản lý database
+Trong loạt bài này chúng ta sẽ sử dụng MySQL là hệ quản trị cơ sở dữ liệu cho hệ thống.
+Để làm việc được với MySQL chúng ta có thể cài MySQL Workben. Tuy nhiên để cho gọn nhẹ, ở đây mình cài Xammpp, và quản lý database với PHPMyAdmin trên trình duyệt. Các bạn có thể cài đặt bất kỳ chương trình nào miễn là có thể tạo và quản lý được cơ sở dữ liệu với MySQL.
+
+OK, Done bài hôm nay chúng ta dừng lại tại đây! Hẹn gặp lại các bạn trong các bài viết tiếp theo.
+
+
+Java Web với JSP/Servlet - Bài 2: Phân tích, xác định kiến trúc hệ thống.
+Chào mừng các bạn đến với loạt hướng bài xây dựng website sử dụng JSP/Servlet theo mô hình MVC của blog khánh spring.
+Trong bài này mình sẽ giới thiệu về ứng dụng web mà chúng ta sắp xây dựng và xác định kiến trúc lập trình cho hệ thống.
+
+#1 Xây dựng website tin tức.
+Trong loạt bài này chúng ta sẽ tiến hành xây dựng website tin tức bao gồm các module:
+Phần frontend: giao diện phía người dùng website:
+- Trang index - hiển thị danh sách các bài viết mới.
+- Trang single - hiển thị chi tiết bài viết
+- Trang tìm kiếm - hiển thị kết quả tìm kiếm
+- Trang categories - hiển thị các bài viết cùng danh mục
+Phần backend: trang quản trị nội dung cho admin bao gồm:
+- Quản lý người dùng.
+- Quản lý các post.
+- Quản lý loại bài viết.
+- Quản lý các page.
+- Quản lý cấu hình trang web.
+- Upload hình ảnh.
+- Dashboard - hiển thị các thông tin chung của hệ thống website.
+- Quản lý comment.
+- Phân quyền.
+- Đăng nhập, đăng xuất.
+
+#2 Kiến trúc lập trình của hệ thống
+
+Hệ thống được chia thành các tằng theo mô hình MVC:
+- Trước tiên chúng ta cần đến các class làm nhiệm vụ ánh xạ tới các table trong database giúp mô hình hóa dữ liệu của hệ thống => Model Object
+- Tầng giao tiếp với database - bao gồm các class có nhiệm vụ thực hiện các tương tác với database: update, insert, delete, select,... => Data Access Object
+- Tầng xử lý nghiệp vụ - là các class thực hiện các tính toán, xử lý các bussiness login của hệ thống (đối với một website tin tức nhỏ thì tầng này không quan trọng bởi vì nó có rất ít các bussiness logic) => Business Object
+- Tầng cotroller - Là các servlet thực hiện nhận các request từ phía client gửi lên và thực hiện lấy về dữ liệu đã qua xử lý ở tầng xử lý nghiệp vụ và xác định view tương ứng để trả về cho client
+- Tầng view - Là các trang JSP và các trang html thực hiện nhiệm vụ hiển thị dữ liệu, hiển thị các form để nhận dữ liệu nhập vào từ client.
+
+Việc phân tầng như này đảm bảo việc che dấu dữ liệu, dễ dàng trong việc phát triển, bảo trì, nâng cấp.
+
+Trong các bài viết tiếp theo chúng ta sẽ cũng nhau thực hiện xây dựng database và thiết kế giao diện.
+
+
+Java Web với JSP/Servlet - Bài 3: Thiết kế database và thiết kế giao diện
+Chào mừng các bạn đến với loạt hướng bài xây dựng website sử dụng JSP/Servlet theo mô hình MVC của blog khánh spring.
+Bài trước chúng ta đã cùng nhau phân tích, xác định các module cần có của website tin tức cũng như tìm hiểu về kiến trúc lập trình tổng quát của hệ thống.
+Trong bài này chúng ta sẽ cùng nhau thiết kế database để quản lý dữ liệu cho hệ thống, và xây dựng nguyên mẫu giao diện bằng html/css/js.
+
+#1 Thiết kế database
+Diagram
+<img />
+Trong đó
+Table Posts lưu trữ các bài viết:
+- Post_ID - ID bài viết, tăng tự động, khóa chính.
+- Post_Name - Tên bài viết
+- Cate_ID - Loại bài viết, khóa ngoại ánh xạ sang bảng Categories
+- User_ID - ID của User viết bài (Tác giả), khóa ngoại ánh xạ sang bảng Users.
+- Post_Content - Nội dung bài viết.
+- Post_Slug - Đường dẫn của bài viết (Ví dụ: http://khanhspring.com/hibernate-native-sql/ thì hibernate-native-sql được gọi là Slug)
+- Publish_Date - Thời gian bài viết được publish
+- Last_Edit - Thời gian cuối cùng chỉnh sửa bài viết.
+- Image - hình ảnh minh họa cho bài viết
+- Num_Views - Số lượng xem bài viết.
+- Status - Tình trạng của bài viết, đây là trường được ánh xạ sang trường par_code trong bảng App_Params.
+Table Pages lưu trữ các page của website (ví dụ: trang about, trang giới thiệu,...). Các trường gần như bảng Posts
+Table Users lưu trữ danh sách người dùng:
+- User_ID - Khóa chính, tăng tự động
+- User_Role - Danh sách quyền người dùng, sử dụng để phân quyền.
+- Status - tương tự như status của Posts: xác định tình trạng người dùng (ví dụ: không kích hoạt, kích hoạt,...) lấy từ trường Par_Code trong bảng App_Params
+Table Categories - Danh sách các thể loại bài viết:
+- Cate_ID - khóa chính, tăng tự động.
+- Cate_Name - Tên thể loại.
+- Cate_Desc - Mô tả (cho phép null)
+- Parent_Cate - Thể loại cha (chính là ID của một thể loại khác.)
+- Slug - Đường dẫn tắt của thể loại.
+- Path - Đường dẫn lần lượt từ thể loại cha tới bản thân thể loại (Ví dụ: thể loại "hoạt hình(id=3)" thuộc thể loại "phim(id=2)", phim lại thuộc thể loại "giải trí(id=1)" thì path của "hoạt hình" sẽ là /1/2/). Dùng để truy vấn các bài viết theo thể loại.
+Table Images - lưu trữ các ảnh được upload lên server(chỉ lưu trữ đường dẫn tới ảnh và một số thông tin của ảnh):
+- Image_Guid - đường dẫn tới ảnh.
+...
+Table Comments - lưu trữ danh sách các comment:
+- Comment_ID - kháo chính, tăng tự động
+- Comment - nội dung comment
+- User_ID - ID của người comment, khóa ngoại - ánh xạ sang bảng Users
+- Status - trạng thái của comment, ánh xạ sang Par_Code của bảng App_Params
+- Post_ID - ID của bài viết được comment, khóa ngoại - ánh xạ sang bảng Posts
+Table App_Params (Application Parameters) - lưu trữ các tham số, thuộc tính ít khi thay đổi của hệ thống (ví dụ: danh sách các trang thái của bài viết, trạng thái comment,...)
+- Par_ID - khóa chính, tăng tự động
+- Par_Type - Loại parameter (ví dụ: Par_Type = 'COMMENT_STATUS' thì xác định đây là tham số để xác định trạng thái của comment)
+- Par_Name - Tên parameter
+- Par_Code - Mã số của parameter
+- Par_Desc - Mô tả
+- Par_Status - trạng thái của parameter này.
+- Par_Order - thứ tự sắp xếp của parameter.
+- Par_Color - màu của parameter (cho phép null)
+#2 Thiết kế giao diện
+Dựa vào các module đã xác định từ bài trước mà mô hình dữ liệu vừa được thiết kê như trên. Chúng ta sẽ tiến hành thiết kế giao diện cho website:
+Sau đây là hình ảnh các mẫu giao diện mình đã thiết kế dưới dạng các trang html tĩnh với css và js:
+Trang Index:
+<img />
+Trang Single:
+<img />
+Trang Admin Thêm mới:
+<img />
+Trang Admin Hiển thị danh sách:
+<img />
+Chúng ta chỉ cần một số trang như trên để thực hiện lập trình, bởi vì các trang khác đều có nội dung, bố cục tương tự những trang này.
+Các bạn có thể tự tay thiết kế lại các trang này theo ý thích nhưng bố cục các phần nên gần giống như trên, để dễ dàng thực hiện lập trình theo các bài viết tiếp theo.
+Hoặc bạn có thể tải bộ giao diện này tại đây: <a href="#">HTML Design</a>
+
+OK! Bài hôm này chúng ta dừng lại tại đây, hẹn gặp lại các bạn trong các bài viết tiếp theo.
+
+Java Web với JSP/Servlet - Bài 4: Tạo project, thêm dữ liệu mẫu, kết nối tới database
+Chào mừng các bạn đến với loạt hướng bài xây dựng website sử dụng JSP/Servlet theo mô hình MVC của blog khánh spring.
+Bài trước chúng ta đã cùng nhau thực hiện thiết kế database và thiết kế giao diện.
+Trong bài viết này chúng ta sẽ đi dựng project java web để tiến hành lập trình, thêm dữ liệu mẫu vào database và thực hiện kết nối tới databse
+#1 Dựng project
+- Các bạn tạo một Dynamic Web Project mới với tên bất kỳ. Các bạn có thể xem lại bài hướng dẫn tạo Dynamic Web Project ở đây: <a href=""></a>
+- Tạo các folder và các package mới như trong hình.
+<img />
+* Để tạo folder mới trong thư mục WebContent các bạn kích chuột phải vào WebContent chọn New -> Folder, đặt tên và Finish.
+Trong đó:
+Các folder:
+- css: chứa các file css
+- images: chứa các hình ảnh như logo,... trong đó có folder con là bg: chứa các hình ảnh được dùng làm background trong website
+- js: chứa các file JavaScript
+- jsp: chứa các file .jsp (View) trong đó folder backend: chứa các trang jsp admin, frontend: chứa các trang jsp client
+- upload: chứa các hình ảnh được tải lên bao gồm avatar người dùng chứa trong thư mục avatar, hình ảnh bài viết chứa trong thư mục thumb.
+Các packge: 
+- com.khanhspring.javawebdemo.model: chứa các class ánh xạ tới các bảng trong cơ sở dữ liệu
+- com.khanhspring.javawebdemo.dao: chứa các class có nhiệm vụ thực hiện các tương tác tới cơ sở dữ liệu.
+- com.khanhspring.javawebdemo.service: chứa các class có nhiệm vụ thực hiện các business logic (xử lý nghiệp vụ).
+- com.khanhspring.javawebdemo.controller: chứa các class servlet thực hiện nhận request từ client và trả về view tương ứng
+- com.khanhspring.javawebdemo.utils: chứa các class utilities.
+
+#2 Thêm dữ liệu mẫu
+Để dễ dàng cho việc lập trình, kiểm tra sự chính xác của các đoạn code khi tương tác với database chúng ta cần thêm dữ liệu mẫu cho các bảng trong database.
+* Để không bị lỗi khi thêm chúng ta cần thêm ở các bảng không có khóa chính trước.
+- Ở đây mình sẽ demo việc thêm dữ liệu ở bảng App_Params để các bạn dễ hình dung chức năng của bảng này. Đây là một số bản ghi:
+(null, 'COMMENT_STATUS', 'Chờ duyệt', 0, 'Chờ duyệt', 1,  0, "#F8DB65"),
+(null, 'COMMENT_STATUS', 'Hiển thị', 1, 'Hiển thị', 1, 1, "#2DCC70"),
+(null, 'COMMENT_STATUS', 'Spam', 2, 'Spam', 1, 2, "#E84C3D"),	
+(null, 'COMMENT_STATUS', 'Bin', 3, 'Đã chuyển vào thùng rác', 1, 3, "#BFC2C7").
+-> đây là các trạng thái comment. Ví dụ: khi comment được đánh dấu là "chờ duyệt" thì đặt trường status của bảng comment đó với giá trị là 0. Khi truy vấn để hiển thị ra màn hình chúng ta chỉ cần select với Par_Type = 'COMMENT_STATUS' và Par_Code là 0 => 'Chờ duyệt'.
+- Tương tự với Post Status: 
+(null, 'POST_STATUS', 'draft', 0, 'draft', 1,  0, "#F8DB65"),
+(null, 'POST_STATUS', 'publish', 1, 'publish', 1, 1, "#2DCC70"),
+(null, 'POST_STATUS', 'bin', 3, 'Đã chuyển vào thùng rác', 1, 3, "#BFC2C7"),
+- Tương tự với Page Status:
+(null, 'PAGE_STATUS', 'draft', 0, 'draft', 1,  0, "#F8DB65"),
+(null, 'PAGE_STATUS', 'publish', 1, 'publish', 1, 1, "#2DCC70"),
+(null, 'PAGE_STATUS', 'bin', 3, 'Đã chuyển vào thùng rác', 1, 3, "#BFC2C7")
+* Lưu ý: ở đây trường Par_ID đề để null là vì trường này được xác định là Autoincrement (Tự động tăng) nên khi insert vào là null thì nó sẽ tự động set giá trị tăng tự động cho trường này.
+- Như vậy bảng App_Params đã khá đầy đủ rồi. Các bạn có thể thêm nếu thấy hợp lý.
+- Thêm dữ liệu cho bảng categories:
+(1, 'Học tập', 'Các bài viết về học tập', null, 'hoc-tap', null),
+(2, 'Java', 'Các bài viết về Java', 1, 'java', '/1/'),
+(3, 'Java Core', 'Các bài viết về Java Core', 2, 'java-core', '/1/2/')
+- Thêm dữ liệu cho bảng: Images
+* Trước tiên bạn thêm một vài hình ảnh vào các thư mục trong upload sau đó insert các giá trị tương ứng:
+(null, 'image1', '/upload/avatar/image1.jpg', null, '2015-06-07 00:00:00'),
+(null, 'image2', '/upload/thumb/image2.jpg', null, '2015-06-07 00:00:00'),
+(null, 'image3', '/upload/thumb/image3.jpg', null, '2015-06-07 00:00:00'),
+(null, 'image4', '/upload/thumb/image4.jpg', null, '2015-06-07 00:00:00')
+- Thêm dữ liệu cho bảng: Users
+(1, 'Xuân Khánh', 'Trần', 1, 'xuankhanhyb@gmail.com', SHA1('123456'), 'ADMIN_ROLE', null, '2015-06-07 00:00:00', '/upload/avatar/image1.jpg');
+- Thêm dữ liệu cho bảng Posts:
+(null, 'Java web demo', 2, 1, 'Đây là nội dung bài viết 1', 'bai-viet-1', '2015-06-07 00:00:00', '2015-06-07 00:00:00', '/upload/thumb/image2.jpg', 0, 1);
+* Lưu ý các trường hình ảnh (Image trong bảng post, Avatar trong bảng Users) chúng ta lưu đường dẫn tới ảnh chứ không lưu khóa trong bảng Images.
+- Tương tự các bạn tự thêm một số bản ghi vào các bảng còn lại nhé!
+
+#3 Xây dựng lớp quản lý các kết nối tới database
+- Chúng ta sẽ xây dựng một ConnectionPool để quản lý các kết nối tới database.
+* ConnectionPool là gì, các bạn có thể google sẽ ra rất nhiều bài viết giải thích về nó. Đại loại khi người dùng thực hiện hành động cần kết nối tới DB thì chương trình sẽ tạo ra 1 connect tới DB (Connection Object) khi người dùng sử dụng xong chương trình sẽ thu hồi lại kết nối đó và lưu trữ lại (vào một Stack chẳng hạn) mà không hủy nó đi. Khi có 1 người dùng khác kết nối tới DB thì chương trình sẽ lấy kết nối đã được lưu trữ ra cho người dùng mà không phải khởi tạo lại. Nếu trong Stack hết kết nối thì chương trình mới tạo mới kết nối.
+- Tuy nhiên để thực hiện được kết nối tới DB (ở đây là MySQL) chúng ta cần sử dụng thư viện JDBC: mysql-connector-java-5.1.27.jar (các bạn chịu khó tìm google nhé!).
+- Sau khi tải về thành công bộ thư viện này các bạn copy và paste vào thư mục lib trong WEB-INF ngay trên eclipse nhé.
+<img />
+- Add xong thư viện chúng ta tiếp tục tạo một file properties trong folder WEB-INF: chuột phải vào folder WEB-INF chọn New -> File và đặt tên file là "database_info.properties". File được sử dụng như file cấu hình các thông số kết nối tới database: khi chúng ta thay đổi các thông số này thì chỉ cần thay đổi trong file này mà không phải sửa code.
+- Nội dung file này như sau:
+[code lang='java']
+#MySQL config
+URL=jdbc:mysql://localhost/ten_database?useUnicode=true&characterEncoding=utf8
+USER=ten_nguoi_dung_trong_mysql
+PASSWORD=mat_khau_cua_ban
+[/code]
+* Ở đây: dấu # là comment code, ten_database bạn thay bằng tên database trong MySQL mà bạn đã tạo, ten_nguoi_dung_trong_mysql thay bằng tên đăng nhập vào MySQL như tài khoản mặc định của mình là root, mat_khau_cua_ban là mật khẩu vào MySQL nếu không tài khoản không đặt mật khẩu thì để trống.
+
+- Bây giờ chúng ta đi tạo Interface ConnectionPool trong package .utils - Interface này xác định các phương thức chúng ta cần có:
+[code lang='java']
+package com.khanhspring.javawebdemo.utils;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public interface ConnectionPool {
+	
+	//tra ve connection
+	public Connection getConnection() throws SQLException;
+	
+	//lay lii ket noi
+	public void releaseConnection(Connection con) throws SQLException;
+	
+	//lam moi pool
+	public void refreshConnectionPool();
+}
+[/code]
+
+- Sau đó chúng ta tạo một class ConnectionPoolImpl để impliment interface vừa tạo:
+[code lang='java']
+package com.khanhspring.javawebdemo.utils;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.Stack;
+
+public class ConnectionPoolImpl implements ConnectionPool {
+
+	// Thong tin account truy cap db
+	private String username;
+	private String userpass;
+
+	// Thong tin trinh dieu khien
+	private String driver;
+
+	// Thong tin duong dan toi CSDL trong MYSQL
+	private String url;
+
+	// Ngan xep luu tru cac ket noi
+	private Stack<Connection> pool;
+
+	public ConnectionPoolImpl() {
+		Properties p = new Properties();
+		try {
+			p.load(Thread.currentThread().getContextClassLoader()
+					.getResourceAsStream("DBInfo.properties"));
+
+			this.username = p.getProperty("USER");
+			this.userpass = p.getProperty("PASSWORD");
+			this.url = p.getProperty("URL");
+
+			// Thong tin chinh dieu khien
+			this.driver = "com.mysql.jdbc.Driver";
+
+			// Khoi tao Stack lưu cac connection
+			this.pool = new Stack<Connection>();
+
+			// load JDBC driver
+			Class.forName(this.driver).newInstance();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public Connection getConnection() throws SQLException {
+		if (this.pool.isEmpty()) {
+			return DriverManager.getConnection(this.url, this.username,
+					this.userpass);
+		} else {
+			return (Connection) this.pool.pop();
+		}
+	}
+
+	@Override
+	public void releaseConnection(Connection con)
+			throws SQLException {
+		this.pool.push(con);
+	}
+
+	@Override
+	public void refreshConnectionPool() {
+		while(!pool.empty()){
+			try {
+				pool.pop().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
+
+[/code]

@@ -1,0 +1,73 @@
+*{margin: 0; padding: 0; font-family: helvetica; font-size: 15px;}
+a{text-decoration: none;}
+
+body{background: #F8F9FE; background: #3D3D3D;}
+#header{width: 100%; box-sizing:border-box; display: table; height: 50px; background: #fff; position: fixed; z-index: 500;}
+#logo{width: 250px; height: 100%; display: table-cell; float: left; box-sizing:border-box; background: #1F1F1F;}
+#logo a{display: block; font-size: 22px; line-height: 50px; text-align: center; color: #1A91B1; transition:0.3s;}
+#logo a:hover{color: #EB5F60;}
+#user-bar{width: 100%; height: 100%; display: table-cell; box-shadow: -1px 0 3px #999;}
+#user-option{float: right; margin-right: 50px; position: relative;}
+#user-info{display: block; padding: 0 30px; background: #F6F8F8;}
+#user-info img{width: 40px; height: 40px; margin-top: 5px; border-radius: 50%; margin-right: 10px;}
+#user-info span{display: inline-block; line-height: 50px; color: #333; vertical-align: top;}
+#user-option ul{display: none; position: absolute; top: 100%; right: 0; width: 200px; background: #fff;
+	border-top: 5px solid #fff;  border-bottom: 5px solid #fff; box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);}
+#user-option ul li{width: 100%; list-style: none;}
+#user-option ul li a{display: block; line-height: 40px; color: #666; text-indent: 20px;}
+#user-option ul li a:hover{background: #F6F6F6; color: #1A91B1;}
+#user-option ul:before{content: ""; width: 0; height: 0; position: absolute;top: -18px; right: 20px; border: 7px solid transparent;
+	border-bottom: 7px solid #fff; z-index: 100;}
+#user-option:hover ul{display: block;}
+
+
+#container{width: 100%; display: table; box-sizing:border-box; height: auto; padding-top: 50px;}
+#sidebar-menu{width: 250px; display: table-cell; float: left; box-sizing:border-box; min-height: 600px; padding-top: 20px;}
+#menu{width: 100%;}
+#menu li{width: 100%;}
+#menu li a{display: block; line-height: 45px; color: #fff; border-top: 1px solid #484848; text-indent: 20px;}
+#menu li a:hover{background: #303030;}
+.menu-item-opened{background: #303030;}
+.super-menu{position: relative;}
+.super-menu:after{content: "+"; display: block; position: absolute; height: 100%; width: 60px; text-align: center; top: 0; right: 0; 
+	font-size: 11px; color: #f1f1f1;}
+#menu > li > a{text-transform: uppercase;}
+#menu ul{border-top: 6px solid #3D3D3D;border-bottom: 6px solid #3D3D3D; display: none;}
+#menu ul li a{text-indent: 40px; border: none; line-height: 35px; background: #3D3D3D;}
+#menu ul li a:hover{background: #474747;}
+#menu ul em{color: #999; font-size: 11px; margin-right: 10px;}
+
+#admin-content{ display: table-cell; width: 100%; box-sizing:border-box; background: #F0F3F4; vertical-align: top;}
+.admin-title{display: block; line-height: 70px; background: #F6F8F8; text-indent: 25px; border-bottom: 1px solid #dee5e7;
+  text-transform: uppercase; font-size: 20px; color: #666; font-weight: normal;}
+.main-content-wrap{width: 100%; box-sizing:border-box; overflow: hidden; padding: 25px;}
+.main-content{width: 100%; box-sizing:border-box; overflow: hidden; background: #fff; min-height: 400px; border: 1px solid #dee5e7;}
+.form-title{display: block; line-height: 40px; text-indent: 25px; background: #F6F8F8; color: #666;}
+.add-new-table{width: 100%;  border-collapse: collapse;}
+.add-new-table td:first-child{width: 200px; text-align: right; font-size: 15px; color: #333; vertical-align: middle;}
+.add-new-table td{padding: 15px 10px; border-top: 1px dashed #dee5e7; border-bottom: 1px dashed #dee5e7;}
+.add-new-table td label{display: inline-block; margin-left: 25px;}
+
+.list-table{width: 100%;  border-collapse: collapse;}
+.list-table td, .list-table th{padding: 15px 10px; border: 1px solid #dee5e7;}
+.list-table td:first-child, .list-table th:first-child{border-left: none;}
+.list-table td:last-child, .list-table th:last-child{border-right: none;}
+.list-table th{color: #666; background: #F6F8F8;}
+.list-table tr:nth-child(2n+1){background: #F6F8F8;}
+.list-table tr:hover{background: #F0F3F4;}
+.btn-del, .btn-edit{display: block; color: #1A91B1;}
+.btn-del{color: #EB5F60; }
+.btn-del:hover, .btn-edit:hover{text-decoration: underline;}
+.edit-cell, .delete-cell{width: 30px; text-align: center;}
+
+.cell-center{text-align: center;}
+
+
+#footer{width: 100%; overflow: hidden; text-align: center; background: #222428; border-bottom: 2px solid #1A91B1;}
+#footer h1{font-weight: normal; color: #fff; line-height: 30px;}
+#footer h1 a{color: #EB5F60;}
+
+/**************form input************/
+.txt-form{box-sizing:border-box; width: 100%; padding: 10px;}
+.cbb-form{box-sizing:border-box; width: 100%; padding: 10px;}
+.btn-form{padding: 8px 20px; color: #fff; background: #1A91B1; border: none; cursor: pointer;}
