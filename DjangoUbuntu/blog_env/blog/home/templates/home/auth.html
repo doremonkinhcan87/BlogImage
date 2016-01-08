@@ -1,0 +1,25 @@
+<h1>Auth </h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Minimal Django File Upload Example</title>
+    </head>
+
+    <body>
+        <!-- List of uploaded documents -->
+        {% if documents %}
+            <ul>
+                {% for document in documents %}
+                    <li><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+					<img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px">
+					<p>{{ document.title }}</p>
+					<p>{{ document.pub_date }}</p>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No documents.</p>
+        {% endif %}
+    </body>
+
+</html>
