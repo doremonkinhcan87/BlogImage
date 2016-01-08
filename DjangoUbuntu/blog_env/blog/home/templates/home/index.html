@@ -13,6 +13,7 @@
                 {% for document in documents %}
                     <li><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
 					<img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px">
+					<p>{{ document.title }}</p>
                 {% endfor %}
             </ul>
         {% else %}
@@ -29,6 +30,7 @@
             <p>
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
+				{{ form.title.label_tag }}{{ form.title }}
             </p>
 
             <p><input type="submit" value="Upload"/></p>

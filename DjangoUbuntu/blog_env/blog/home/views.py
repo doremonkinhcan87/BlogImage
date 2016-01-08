@@ -19,7 +19,9 @@ def index(request):
 	if request.method == 'POST':
 		form = DocumentForm(request.POST, request.FILES)
 		if form.is_valid():
-			newdoc = Document(docfile=request.FILES['docfile'])
+			newdoc = Document()
+			newdoc.docfile = request.FILES['docfile']
+			newdoc.title = request.POST['title']
 			newdoc.save()
 
 			# Redirect to the document index after POST
@@ -34,6 +36,25 @@ def index(request):
 	# Render index page with the documents and the form
 	return render_to_response(
 		'home/index.html',
+		{'documents': documents, 'form': form},
+		context_instance=RequestContext(request)
+	)
+
+def auth(request):
+	# Handle file upload
+	if request.method == 'POST':
+		form = DocumentForm(request.POST, request.FILES)
+		if form.is_valid():
+			newdoc = Document()
+			newdoc.docfile = request.FILES['docfile']
+			newdoc.title = request.POST['title']
+			newdoc.save()
+			return HttpResponseRedirect('/auth')
+	else:
+		form = DocumentForm()
+	documents = Document.objects.all()
+	return render_to_response(
+		'home/auth.html',
 		{'documents': documents, 'form': form},
 		context_instance=RequestContext(request)
 	)
