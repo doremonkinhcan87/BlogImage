@@ -1,0 +1,27 @@
+.banner-homepage{
+	background-image:url('/media/image/champagner-1071356_1920.jpg');
+	position: relative; 
+	height: 500px;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    transition: .8s;
+	margin-bottom: 0px;
+	padding: 0px 0;
+	}
+	
+#main_navbar .navbar-nav > li > a {
+    color: #fff;
+    border-radius: 0;
+    padding: 5px;
+    margin: 5px;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    -webkit-transition: border 0.2s;
+    -o-transition: border 0.2s;
+    transition: border 0.2s;
+}
+#main_navbar .navbar-nav > li > a:hover, #main_navbar .navbar-nav > li > a:active {
+    background-color: transparent;
+    border-bottom: 1px solid #fff;
+}

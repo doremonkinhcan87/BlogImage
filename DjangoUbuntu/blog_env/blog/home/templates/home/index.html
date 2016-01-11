@@ -1,42 +1,76 @@
-<h1>Hello word</h1>
 <!DOCTYPE html>
 <html>
     <head>
+		<link href="/media/src/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="/media/src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/media/src/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<script src="/media/src/bootstrap/js/bootstrap.js"></script>
+		<link rel="stylesheet" href="/media/src/css/main.css">
         <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>
+        <title>Image Django By Thuy Testing</title>
+		<style>
+			#items .item .info {
+				visibility: hidden;
+			}
+
+			#items .item:hover .info {
+				visibility: visible; color:White;
+			}
+		</style>
     </head>
 
     <body>
+		<div class="jumbotron banner-homepage">
+			<nav id="main_navbar" class="container navbar index">
+				<div class="container-fluid">
+					<nav class="collapse navbar-collapse navbar-main navbar-left">
+						<ul class="navbar-nav navbar-right nav">
+							<li><a href="#">Home</a></li>
+						</ul>
+					</nav>
+					<nav class="collapse navbar-collapse navbar-main navbar-right">
+						<ul class="navbar-nav navbar-right nav">
+							<li><a href="#" style = "color: #777">Explore</a></li>
+							<li><a href="#">Sign up</a></li>
+							<li><a href="#">Log in</a></li>
+						</ul>
+					</nav>
+				</div>
+			</nav>
+		</div> 
+		<div class="masthead" style = "width: 40%; margin: 0 auto;">
+			<nav>
+				<ul class="nav nav-justified">
+					<li class="active"><a href="#">Photos</a></li>
+					<li><a href="#">Illustrations</a></li>
+					<li><a href="#">Vector graphics</a></li>
+					<li><a href="#">Videos</a></li>
+				</ul>
+			</nav>
+		</div>
+
         <!-- List of uploaded documents -->
         {% if documents %}
-            <ul>
-                {% for document in documents %}
-                    <li><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-					<img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px">
-					<p>{{ document.title }}</p>
-                {% endfor %}
-            </ul>
+			<div class="row" style="background: #f7f8fa;">
+				<div class="col-md-12">
+				{% for document in documents %}
+					<div class="col-md-2">
+						<div id="items" class="thumbnail" >
+							<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+								<div class="info">
+							   		<p>{{ document.title }}<br/>{{ document.pub_date }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+			
         {% else %}
             <p>No documents.</p>
         {% endif %}
 
-        <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url 'home:index' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
-
-            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
-            <p>
-                {{ form.docfile.errors }}
-                {{ form.docfile }}
-				{{ form.title.label_tag }}{{ form.title }}
-            </p>
-
-            <p><input type="submit" value="Upload"/></p>
-        </form>
     </body>
 
 </html>
-
-<img src="/media/fb.jpg">

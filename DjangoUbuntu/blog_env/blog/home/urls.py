@@ -12,6 +12,14 @@ urlpatterns = [
 		home_views.auth,
 		name='auth'),
 	url(
+		r'^update/(?P<id>[\d]+)$',
+		home_views.update_auth,
+		name='update'),
+	url(
+		r'^remove/(?P<id>[\d]+)$',
+		home_views.remove_auth,
+		name='remove'),
+	url(
 		r'^media/(?P<path>.*)$', 
 		'django.views.static.serve',
 		{'document_root': settings.MEDIA_ROOT}),

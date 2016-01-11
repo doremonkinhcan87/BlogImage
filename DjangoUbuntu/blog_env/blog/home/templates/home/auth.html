@@ -1,25 +1,41 @@
-<h1>Auth </h1>
+<h1>Hello word</h1>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>
-    </head>
+<head>
+	<meta charset="utf-8">
+	<title>Minimal Django File Upload Example</title>
+</head>
 
-    <body>
-        <!-- List of uploaded documents -->
+<body>
+	<!-- Upload form. Note enctype attribute! -->
+	{% if id == None %}
+	   <form action="{% url 'home:auth' %}" method="post" enctype="multipart/form-data">
+	{% else %}
+	   <form action="{% url 'home:update' id=id %}" method="post" enctype="multipart/form-data">
+	{% endif %}
+		{% csrf_token %}
+		<p>
+			{{ form.docfile.label_tag }}{{ form.docfile }}
+			{{ form.title.label_tag }}{{ form.title }}
+		</p>
+		<p><input type="submit" value="Upload"/></p>
+		
+		<!-- List of uploaded documents -->
         {% if documents %}
-            <ul>
-                {% for document in documents %}
-                    <li><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-					<img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px">
-					<p>{{ document.title }}</p>
-					<p>{{ document.pub_date }}</p>
-                {% endfor %}
-            </ul>
+			{% for document in documents %}
+			<table border=1 style="width: 100%; border-collapse: collapse">
+				<tr>
+					<td>{{ document.title }}</td>
+					<td><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
+					<td><img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px"></td>
+					<td><a href="{% url 'home:update' id=document.id %}">Edit</a></td>
+					<td><a href="{% url 'home:remove' id=document.id %}">Remove</a></td>
+				</tr>
+			</table>
+			{% endfor %}
         {% else %}
             <p>No documents.</p>
         {% endif %}
-    </body>
-
+	</form>
+</body>
 </html>
