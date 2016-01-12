@@ -17,6 +17,7 @@
 		<p>
 			{{ form.docfile.label_tag }}{{ form.docfile }}
 			{{ form.title.label_tag }}{{ form.title }}
+			{{ form.users }}
 		</p>
 		<p><input type="submit" value="Upload"/></p>
 		<a href="{% url 'home:logout' %}">Logout</a>

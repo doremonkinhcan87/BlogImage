@@ -12,12 +12,17 @@ from django.contrib.auth.hashers import make_password, check_password
 
 def admin(request):
 	# Handle file upload
+	s = request.session.get('users_id', None)
+	if not s:
+		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = DocumentForm(request.POST, request.FILES)
 		if form.is_valid():
 			newdoc = Document()
 			newdoc.docfile = request.FILES['docfile']
 			newdoc.title = request.POST['title']
+			newdoc.users_id = request.POST['users']
+			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 
 			# Redirect to the document index after POST
