@@ -8,10 +8,13 @@ from home.models import Document
 from home.models import DocumentForm
 from home.models import Users
 from home.models import UsersForm
+from home.models import Tags
+from home.models import TagsForm
 from django.contrib.auth.hashers import make_password, check_password
 
 def admin(request):
 	# Handle file upload
+	tags = Tags.objects.all()
 	s = request.session.get('users_id', None)
 	if not s:
 		return HttpResponseRedirect('/auth')
@@ -22,6 +25,7 @@ def admin(request):
 			newdoc.docfile = request.FILES['docfile']
 			newdoc.title = request.POST['title']
 			newdoc.users_id = request.POST['users']
+			newdoc.tags = tags.id
 			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 
@@ -192,3 +196,25 @@ def logout(request):
 		request,
 		'home/auth.html'
 		)
+		
+def tags(request):
+	if request.method == 'POST':
+		form = TagsForm(request.POST)
+		if form.is_valid():
+			newdoc = Tags()
+			newdoc.users_id = request.POST['users']
+			newdoc.name = request.POST['name']
+			newdoc.save()
+			return HttpResponseRedirect('/tags')
+	else:
+		form = TagsForm()  # A empty, unbound form
+
+	# Load documents for the index page
+	documents = Tags.objects.all()
+
+	# Render index page with the documents and the form
+	return render_to_response(
+		'home/tags.html',
+		{'tags': tags, 'form': form},
+		context_instance=RequestContext(request)
+	)

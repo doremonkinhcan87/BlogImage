@@ -45,5 +45,9 @@ urlpatterns = [
 		r'^logout$',
 		home_views.logout,
 		name='logout'),
+	url(
+		r'^tags$',
+		home_views.tags,
+		name='tags'),
 
 	] 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Minimal Django File Upload Example</title>
+</head>
+<body>
+	<h1>Wellcome Website Tags</h1>
+	<form action="{% url 'home:tags'%}" method="post">
+		{% csrf_token %}
+		<input type="text" name="name" placeholder="Name..."/>
+		<input type="submit" value="Submit" />
+	</form>
+</body>
+</html>
