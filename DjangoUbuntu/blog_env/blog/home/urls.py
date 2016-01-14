@@ -49,5 +49,9 @@ urlpatterns = [
 		r'^tags$',
 		home_views.tags,
 		name='tags'),
+	url(
+		r'^category$',
+		home_views.category,
+		name='category'),
 
 	] 

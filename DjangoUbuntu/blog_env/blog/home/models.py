@@ -12,7 +12,7 @@ class Users(models.Model):
 	role = models.CharField(max_length=256)
 	email = models.CharField(max_length=256, default="")
 	class Meta:
-		db_table = "users"
+		db_table = "blog_users"
 		ordering = ['-id']
 	def __str__(self):
 		return self.role
@@ -27,12 +27,13 @@ class UsersForm(forms.ModelForm):
 	class Meta:
 		model = Users
 		fields = ['firt_name', 'last_name', 'password', 'role', 'email']
+		
 class Tags(models.Model):
 	id = models.AutoField(primary_key=True)
 	users = models.ForeignKey(to=Users, related_name="+", null=True, blank=True)
 	name = models.CharField(max_length=256)
 	class Meta:
-		db_table = 'tags'
+		db_table = 'blog_tags'
 		ordering = ['-id']
 	def __str__(self):
 		return self.name
@@ -43,6 +44,25 @@ class TagsForm(forms.ModelForm):
 	class Meta:
 		model = Tags
 		fields = ['users', 'name']
+
+class Category(models.Model):
+	id = models.AutoField(primary_key=True)
+	users = models.ForeignKey(to=Users, related_name="+", null=True, blank=True)
+	name = models.CharField(max_length=256)
+	description = models.CharField(max_length=256)
+	class Meta:
+		db_table = 'blog_category'
+		ordering = ['-id']
+	def __str__(self):
+		return self.name
+		
+class CategoryForm(forms.ModelForm):
+	name = forms.CharField(label='Name')
+	users = models.ForeignKey(Users)
+	description = forms.CharField(label='Description')
+	class Meta:
+		model = Tags
+		fields = ['users', 'name', 'description']
 		
 class Document(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -51,18 +71,28 @@ class Document(models.Model):
 	title = models.CharField(max_length=256, default= '')
 	pub_date = models.DateTimeField(auto_now_add=True, blank=True)
 	tags = models.ManyToManyField(Tags, related_name="tags_ids")
+	category = models.ForeignKey(to=Category, related_name="category_id", null=True, blank=True)
+	subtitle = models.CharField(max_length=256, default= '')
+	summary = models.TextField(default= '')
+	content = models.TextField(default= '')
+	publish = models.BooleanField(default=True)
 	class Meta:
-		db_table = "document"
+		db_table = "blog_document"
 		ordering = ['-id']
 
 class DocumentForm(forms.ModelForm):
 	users = models.ForeignKey(Users)
 	tags = models.ManyToManyField(Tags)
+	category = models.ForeignKey(Category)
 	docfile = forms.ImageField(label='Select a file')
-	title = forms.CharField(max_length=256, label='Title')
+	title = forms.CharField(label='Title')
+	subtitle = forms.CharField(label='Subtitle')
+	summary = forms.CharField(widget = forms.Textarea)
+	content = forms.CharField(widget = forms.Textarea)
+	publish = forms.BooleanField()
 	class Meta:
 		model = Document
-		fields = ['docfile','title', 'users', 'tags']
+		fields = ['docfile','title', 'users', 'tags', 'category', 'subtitle', 'summary', 'content', 'publish']
 		widgets = {
 			'body': forms.Textarea(),
 			'tags': forms.CheckboxSelectMultiple()

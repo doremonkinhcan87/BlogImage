@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Wellcome Website Tags</h1>
-	<form action="{% url 'home:tags'%}" method="post">
+	<form action="{% url 'home:category'%}" method="post">
 		{% csrf_token %}
 		{{form}}
 		<input type="submit" value="Submit" />

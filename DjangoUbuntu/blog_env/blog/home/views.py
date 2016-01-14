@@ -10,6 +10,8 @@ from home.models import Users
 from home.models import UsersForm
 from home.models import Tags
 from home.models import TagsForm
+from home.models import Category
+from home.models import CategoryForm
 from django.contrib.auth.hashers import make_password, check_password
 
 def admin(request):
@@ -25,6 +27,7 @@ def admin(request):
 			newdoc.docfile = request.FILES['docfile']
 			newdoc.title = request.POST['title']
 			newdoc.users_id = request.POST['users']
+			newdoc.category_id = request.POST['category']
 			newdoc.tags = tags.id
 			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
@@ -207,14 +210,29 @@ def tags(request):
 			newdoc.save()
 			return HttpResponseRedirect('/tags')
 	else:
-		form = TagsForm()  # A empty, unbound form
-
-	# Load documents for the index page
+		form = TagsForm()
 	documents = Tags.objects.all()
-
-	# Render index page with the documents and the form
 	return render_to_response(
 		'home/tags.html',
 		{'tags': tags, 'form': form},
+		context_instance=RequestContext(request)
+	)
+
+def category(request):
+	if request.method == 'POST':
+		form = CategoryForm(request.POST)
+		if form.is_valid():
+			newdoc = Category()
+			newdoc.users_id = request.POST['users']
+			newdoc.name = request.POST['name']
+			newdoc.description = request.POST['description']
+			newdoc.save()
+			return HttpResponseRedirect('/category')
+	else:
+		form = CategoryForm()
+	documents = Category.objects.all()
+	return render_to_response(
+		'home/category.html',
+		{'category': category, 'form': form},
 		context_instance=RequestContext(request)
 	)
