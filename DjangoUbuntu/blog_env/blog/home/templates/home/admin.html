@@ -31,46 +31,45 @@
 		<p>
 			<table border=1 style="width: 100%; border-collapse: collapse">
 				<tr>
-					<td><label>Category</label></td>
-					<td>{{ form.category }}</td>
-				</tr>
-				<tr>
 					<td>{{ form.title.label_tag }}</td>
 					<td>{{ form.title }}</td>
-				</tr>
-				<tr>
-					<td>{{ form.subtitle.label_tag }}</td>
-					<td>{{ form.subtitle }}</td>
 				</tr>
 				<tr>
 					<td><label>User</label></td>
 					<td>{{ form.users }}</td>
 				</tr>
 				<tr>
-					<td>{{ form.summary.label_tag }}</td>
-					<td>{{ form.summary }}</td>
+					<td>{{ form.docfile.label_tag }}</td>
+					<td>{{ form.docfile }}</td>
 				</tr>
 				<tr>
 					<td><label>Tags</label></td>
 					<td>
 						<div id="menu">
 							<ul>
-								<li >{{ form.tags }}</li>
+								<li>{{ form.tags }}</li>
 							</ul>
 						</div>
-							
 					</td>
 				</tr>
 				<tr>
-					<td>{{ form.docfile.label_tag }}</td>
-					<td>{{ form.docfile }}</td>
+					<td><label>Category</label></td>
+					<td>{{ form.category }}</td>
 				</tr>
 				<tr>
-					<td>{{ form.content.label_tag }}</td>
+					<td><label>Subtitle</label></td>
+					<td>{{ form.subtitle }}</td>
+				</tr>
+				<tr>
+					<td><label>Content</label></td>
 					<td>{{ form.content }}</td>
 				</tr>
 				<tr>
-					<td>{{ form.publish.label_tag }}</td>
+					<td><label>Summary</label></td>
+					<td>{{ form.summary }}</td>
+				</tr>
+				<tr>
+					<td><label>Publish</label></td>
 					<td>{{ form.publish }}</td>
 				</tr>
 			</table>

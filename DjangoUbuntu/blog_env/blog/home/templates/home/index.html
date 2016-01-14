@@ -16,6 +16,7 @@
 			#items .item:hover .info {
 				visibility: visible; color:White;
 			}
+			
 		</style>
     </head>
 
@@ -38,17 +39,20 @@
 				</div>
 			</nav>
 		</div> 
-		<div class="masthead" style = "width: 40%; margin: 0 auto;">
-			<nav>
-				<ul class="nav nav-justified">
-					<li class="active"><a href="#">Photos</a></li>
-					<li><a href="#">Illustrations</a></li>
-					<li><a href="#">Vector graphics</a></li>
-					<li><a href="#">Videos</a></li>
-				</ul>
-			</nav>
-		</div>
+		<div class="container">
+			<div class="masthead" >
+				<nav>
+					<ul class="nav nav-justified">
+						<li class="active"><a href="#">Photos</a></li>
+						<li><a href="#">Illustrations</a></li>
+						<li><a href="#">Vector graphics</a></li>
+						<li><a href="#">Videos</a></li>
 
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
         <!-- List of uploaded documents -->
         {% if documents %}
 			<div class="row" style="background: #f7f8fa;">
@@ -70,7 +74,5 @@
         {% else %}
             <p>No documents.</p>
         {% endif %}
-
     </body>
-
 </html>

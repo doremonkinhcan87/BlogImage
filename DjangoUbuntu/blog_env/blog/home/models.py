@@ -83,9 +83,9 @@ class Document(models.Model):
 class DocumentForm(forms.ModelForm):
 	users = models.ForeignKey(Users)
 	tags = models.ManyToManyField(Tags)
-	category = models.ForeignKey(Category)
 	docfile = forms.ImageField(label='Select a file')
 	title = forms.CharField(label='Title')
+	category = models.ForeignKey(Category)
 	subtitle = forms.CharField(label='Subtitle')
 	summary = forms.CharField(widget = forms.Textarea)
 	content = forms.CharField(widget = forms.Textarea)

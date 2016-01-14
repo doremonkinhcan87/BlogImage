@@ -27,20 +27,18 @@ def admin(request):
 			newdoc.docfile = request.FILES['docfile']
 			newdoc.title = request.POST['title']
 			newdoc.users_id = request.POST['users']
-			newdoc.category_id = request.POST['category']
-			newdoc.tags = tags.id
+			newdoc.summary = request.POST['summary']
+			newdoc.content = request.POST['content']
+			newdoc.publish = request.POST['publish']
+			# newdoc.category_id = request.POST['category']
+			# newdoc.tags = tags.id
 			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
-
-			# Redirect to the document index after POST
-			#return HttpResponseRedirect(reverse('views.index'))
 			return HttpResponseRedirect('/admin')
 	else:
 		form = DocumentForm()  # A empty, unbound form
-
 	# Load documents for the index page
 	documents = Document.objects.all()
-
 	# Render index page with the documents and the form
 	return render_to_response(
 		'home/admin.html',
