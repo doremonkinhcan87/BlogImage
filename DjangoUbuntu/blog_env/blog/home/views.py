@@ -76,19 +76,19 @@ def remove_admin(request, id):
 
 def index(request):
 	# Handle file upload
-	s = request.session.get('users_id', None)
-	if not s:
-		return render(
-				request,
-				'home/index.html'
-			)
+	# s = request.session.get('users_id', None)
+	# if not s:
+		# return render(
+				# request,
+				# 'home/index.html'
+			# )
 	if request.method == 'POST':
 		form = DocumentForm(request.POST, request.FILES)
 		if form.is_valid():
 			newdoc = Document()
 			newdoc.docfile = request.FILES['docfile']
 			newdoc.title = request.POST['title']
-			request.session['users_id'] = newdoc.users_id
+			#request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/')
 	else:
