@@ -180,10 +180,7 @@ def auth(request):
 		password = request.POST.get('password', None)
 		try:
 			users = Users.objects.get(email=email)
-			if users.email == email and users.password == password and users.role == 'admin':	
-				request.session['users_id'] = users.id
-				return HttpResponseRedirect('/login')
-			elif users.email == email and users.password == password and users.role == 'user':
+			if users.email == email and users.password == password:	
 				request.session['users_id'] = users.id
 				return HttpResponseRedirect('/admin')
 			else:
@@ -206,12 +203,16 @@ def logout(request):
 		)
 		
 def tags(request):
+	s = request.session.get('users_id', None)
+	if not s:
+		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = TagsForm(request.POST)
 		if form.is_valid():
 			newdoc = Tags()
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
+			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/tags')
 	else:
@@ -224,6 +225,9 @@ def tags(request):
 	)
 
 def category(request):
+	s = request.session.get('users_id', None)
+	if not s:
+		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = CategoryForm(request.POST)
 		if form.is_valid():
@@ -231,6 +235,7 @@ def category(request):
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
 			newdoc.description = request.POST['description']
+			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/category')
 	else:
