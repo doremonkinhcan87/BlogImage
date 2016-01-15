@@ -54,25 +54,43 @@
 		</div>
 		
         <!-- List of uploaded documents -->
-        {% if documents %}
-			<div class="row" style="background: #f7f8fa;">
-				<div class="col-md-12">
-				{% for document in documents %}
+		{% if posts %}
+			<div class="container-fluid">
+				{% for post in posts.object_list %}
 					<div class="col-md-2">
 						<div id="items" class="thumbnail" >
-							<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+							<div class="item" style="background:url('/media/{{ post.docfile.url }}') center center; background-size:cover; height:200px">
 								<div class="info">
-							   		<p>{{ document.title }}<br/>{{ document.pub_date }}</p>
+									<p>{{ post.title }}<br/>{{ post.pub_date }}</p>
 								</div>
 							</div>
 						</div>
 					</div>
+					{{ post.body|truncatewords:80 }}
 				{% endfor %}
-				</div>
 			</div>
-			
-        {% else %}
-            <p>No documents.</p>
-        {% endif %}
+			<div class="container-fluid">
+				<nav style=" text-align: center;">
+					<ul class="pagination">
+						{% if posts.has_previous %}
+						  <li><a href="?page={{ posts.previous_page_number }}"><<</a></li>
+					  {% endif %}
+					  {% for pg in posts.paginator.page_range %}
+						  {% if posts.number == pg %}
+							  <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+						  {% else %}
+							  <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+						  {% endif %}
+					  {% endfor %}
+					  {% if posts.has_next %}
+						  <li><a href="?page={{ posts.next_page_number }}">>></a></li>
+					  {% endif %}
+					
+					</ul>
+				</nav>
+			</div>
+		{% else %}
+            <p>No documents</p>
+		{% endif %}
     </body>
 </html>

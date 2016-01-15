@@ -13,6 +13,7 @@ from home.models import TagsForm
 from home.models import Category
 from home.models import CategoryForm
 from django.contrib.auth.hashers import make_password, check_password
+from django.core.paginator import Paginator
 
 def admin(request):
 	# Handle file upload
@@ -93,10 +94,24 @@ def index(request):
 			return HttpResponseRedirect('/')
 	else:
 		form = DocumentForm()
+		
 	documents = Document.objects.all()
+	posts_list = Document.objects.all()
+
+	paginator = Paginator(posts_list, 12)
+
+	try:
+		page = int(request.GET.get('page', '1'))
+	except:
+		page = 1
+
+	try:
+		posts = paginator.page(page)
+	except(EmptyPage, InvalidPage):
+		posts = paginator.page(paginator.num_pages)
 	return render_to_response(
 		'home/index.html',
-		{'documents': documents, 'form': form},
+		{'documents': documents, 'form': form,'posts': posts,},
 		context_instance=RequestContext(request)
 	)
 
@@ -180,7 +195,10 @@ def auth(request):
 		password = request.POST.get('password', None)
 		try:
 			users = Users.objects.get(email=email)
-			if users.email == email and users.password == password:	
+			if users.email == email and users.password == password and users.role == 'admin':	
+				request.session['users_id'] = users.id
+				return HttpResponseRedirect('/login')
+			elif users.email == email and users.password == password and users.role == 'user':
 				request.session['users_id'] = users.id
 				return HttpResponseRedirect('/admin')
 			else:
@@ -203,16 +221,12 @@ def logout(request):
 		)
 		
 def tags(request):
-	s = request.session.get('users_id', None)
-	if not s:
-		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = TagsForm(request.POST)
 		if form.is_valid():
 			newdoc = Tags()
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
-			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/tags')
 	else:
@@ -225,9 +239,6 @@ def tags(request):
 	)
 
 def category(request):
-	s = request.session.get('users_id', None)
-	if not s:
-		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = CategoryForm(request.POST)
 		if form.is_valid():
@@ -235,7 +246,6 @@ def category(request):
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
 			newdoc.description = request.POST['description']
-			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/category')
 	else:
@@ -246,3 +256,9 @@ def category(request):
 		{'category': category, 'form': form},
 		context_instance=RequestContext(request)
 	)
+
+def page_admin(request):
+	return render(
+		request,
+		'home/page_admin.html'
+		)
