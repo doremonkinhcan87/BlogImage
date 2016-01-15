@@ -40,6 +40,17 @@ def admin(request):
 		form = DocumentForm()  # A empty, unbound form
 	# Load documents for the index page
 	documents = Document.objects.all()
+	paginator = Paginator(documents, 4)
+
+	try:
+		page = int(request.GET.get('page', '1'))
+	except:
+		page = 1
+	try:
+		documents = paginator.page(page)
+	except(EmptyPage, InvalidPage):
+		documents = paginator.page(paginator.num_pages)
+		
 	# Render index page with the documents and the form
 	return render_to_response(
 		'home/admin.html',
@@ -195,10 +206,7 @@ def auth(request):
 		password = request.POST.get('password', None)
 		try:
 			users = Users.objects.get(email=email)
-			if users.email == email and users.password == password and users.role == 'admin':	
-				request.session['users_id'] = users.id
-				return HttpResponseRedirect('/login')
-			elif users.email == email and users.password == password and users.role == 'user':
+			if users.email == email and users.password == password:	
 				request.session['users_id'] = users.id
 				return HttpResponseRedirect('/admin')
 			else:
@@ -209,24 +217,18 @@ def auth(request):
 		request,
 		'home/auth.html'
 	)
-	
-def logout(request):
-	try:
-		del request.session['users_id']
-	except KeyError:
-		pass
-	return render(
-		request,
-		'home/auth.html'
-		)
 		
 def tags(request):
+	s = request.session.get('users_id', None)
+	if not s:
+		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = TagsForm(request.POST)
 		if form.is_valid():
 			newdoc = Tags()
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
+			request.session['users_id'] = users.id
 			newdoc.save()
 			return HttpResponseRedirect('/tags')
 	else:
@@ -239,6 +241,9 @@ def tags(request):
 	)
 
 def category(request):
+	s = request.session.get('users_id', None)
+	if not s:
+		return HttpResponseRedirect('/auth')
 	if request.method == 'POST':
 		form = CategoryForm(request.POST)
 		if form.is_valid():
@@ -246,6 +251,7 @@ def category(request):
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
 			newdoc.description = request.POST['description']
+			request.session['users_id'] = users.id
 			newdoc.save()
 			return HttpResponseRedirect('/category')
 	else:
@@ -256,9 +262,12 @@ def category(request):
 		{'category': category, 'form': form},
 		context_instance=RequestContext(request)
 	)
-
-def page_admin(request):
+def logout(request):
+	try:
+		del request.session['users_id']
+	except KeyError:
+		pass
 	return render(
 		request,
-		'home/page_admin.html'
+		'home/auth.html'
 		)
