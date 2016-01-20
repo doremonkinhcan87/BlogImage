@@ -15,3 +15,47 @@
     <!-- Current language: {{ LANGUAGE_CODE }} -->
     <p>{% trans "Welcome to our page" %}</p>
 {% endlanguage %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% block title %}{% trans "translation test" %}{% endblock %}
+{% get_available_languages as LANGUAGES %}
+    <form action="/i18n/setlang/" method="post">{% csrf_token %}
+      <input name="next" type="hidden" value="/" />
+        {% csrf_token %}
+        <select name="language">
+          {% for lang in LANGUAGES %}
+            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+          {% endfor %}
+        </select>
+      <input type="submit" value="Go" />
+    </form>
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<div id="some-text">
+  {% trans "some translated text goes here" %}
+  {% blocktrans %}
+  <ol>
+    <li>here are some</li>
+    <li>items that should be</li>
+    <li>translated as well</li>
+  </ol>
+  {% endblocktrans %}
+  <ul>
+      <li>The current language is <b>{{ LANGUAGE_CODE }}</b></li>
+      {% if LANGUAGE_BIDI %}
+        <li>The current language is bidirectional</li>
+      {% else %}
+        <li>The current language is <b>not</b> bidirectional</li>
+      {% endif %}
+      <li>Available languages are:
+        <ul>
+        {% for lang in LANGUAGES %}
+          <li>{{ lang.1}}</li>
+        {% endfor %}
+        </ul>
+      </li>
+  </ul>
+</div>
