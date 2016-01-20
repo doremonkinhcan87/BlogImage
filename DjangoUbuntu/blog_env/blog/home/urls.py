@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 from django.conf import settings
+from django.views.static import serve
 from home import views as home_views
-from django.conf.urls.i18n import i18n_patterns
+
 urlpatterns = [
 	url(
 		r'^$',
@@ -26,8 +27,9 @@ urlpatterns = [
 	
 	url(
 		r'^media/(?P<path>.*)$', 
-		'django.views.static.serve',
-		{'document_root': settings.MEDIA_ROOT}),
+		serve, 
+		{'document_root': settings.MEDIA_ROOT,}
+		),
 		
 	url(
 		r'^login$',
@@ -54,7 +56,7 @@ urlpatterns = [
 		home_views.category,
 		name='category'),
 	url(
-		r'^^test$',
+		r'^test$',
 		home_views.test,
 		name='test'),
 ]
