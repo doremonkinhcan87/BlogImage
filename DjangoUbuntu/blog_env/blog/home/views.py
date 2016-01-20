@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -271,3 +271,10 @@ def logout(request):
 		request,
 		'home/auth.html'
 		)
+
+def test(request):
+	return render(
+		request,
+		'home/test.html'
+		)
+

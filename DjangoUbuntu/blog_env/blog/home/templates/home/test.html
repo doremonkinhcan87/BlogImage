@@ -1,0 +1,17 @@
+{% load i18n %}
+<h1>Testing Language</h1>
+<h1>{% trans "Xin Chao" %}</h1>
+<h1>Xin Chao</h1>
+{% block content %}
+    {% trans "Hello World" %}
+{% endblock content %}
+
+{% get_current_language as LANGUAGE_CODE %}
+<!-- Current language: {{ LANGUAGE_CODE }} -->
+<p>{% trans "Welcome to our page" %}</p>
+
+{% language 'en' %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <!-- Current language: {{ LANGUAGE_CODE }} -->
+    <p>{% trans "Welcome to our page" %}</p>
+{% endlanguage %}

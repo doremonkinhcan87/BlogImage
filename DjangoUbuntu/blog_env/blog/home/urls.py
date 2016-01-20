@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.conf import settings
 from home import views as home_views
-
+from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
 	url(
 		r'^$',
@@ -53,4 +53,8 @@ urlpatterns = [
 		r'^category$',
 		home_views.category,
 		name='category'),
-	] 
+	url(
+		r'^^test$',
+		home_views.test,
+		name='test'),
+]

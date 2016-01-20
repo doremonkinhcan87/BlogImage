@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,6 +50,9 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'home.middleware.ImageMiddleware',
+	'home.middleware.ProxyProcessing',
+	'django.middleware.locale.LocaleMiddleware',
+	'home.middleware.SessionBasedLocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -66,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				'django.template.context_processors.i18n',
             ],
         },
     },
@@ -111,8 +116,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'vi' # Ngôn ngữ mặc định dùng trong text của phần translate. 
+ugettext = lambda s: s
+LANGUAGES = [ # Danh sách ngôn ngữ được sử dụng
+    ('vi', ugettext('Việt Nam')),
+    ('en', ugettext('English')),
+]
+LOCALE_PATHS = ( # Nơi chứa các file dịch
+    '/var/www/blog_env/blog/locale',
+)
+#LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
