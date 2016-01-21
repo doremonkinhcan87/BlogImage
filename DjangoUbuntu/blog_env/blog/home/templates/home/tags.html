@@ -93,6 +93,7 @@
 								{% for tag in tags %}
 							<tr>
 								<td>{{ tag.name }}</td>
+								<td>{{ tag.users }}</td>
 								<td><a href="{% url 'home:update_tags' id=tag.id %}">Edit</a></td>
 								<td><a href="{% url 'home:remove_tags' id=tag.id %}">Remove</a></td>
 							</tr>

@@ -86,6 +86,7 @@
 								{% for category in categorys %}
 							<tr>
 								<td>{{ category.name }}</td>
+								<td >{{ category.users }}</td>
 								<td><a href="{% url 'home:update_category' id=category.id %}">Edit</a></td>
 								<td><a href="{% url 'home:remove_category' id=category.id %}">Remove</a></td>
 							</tr>

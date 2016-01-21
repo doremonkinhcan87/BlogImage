@@ -8,6 +8,7 @@ class Users(models.Model):
 	id = models.AutoField(primary_key=True)
 	firt_name = models.CharField(max_length=256)
 	last_name = models.CharField(max_length=256)
+	user_name = models.CharField(max_length=256, default="")
 	password = models.CharField(max_length=256)
 	role = models.CharField(max_length=256)
 	email = models.CharField(max_length=256, default="")
@@ -23,9 +24,10 @@ class UsersForm(forms.ModelForm):
 	password = forms.CharField(label='Password', max_length=100, strip=True)
 	role = forms.CharField(label='Role', max_length=100, strip=True)
 	email = forms.CharField(label='Email', max_length=100, strip=True)
+	user_name = forms.CharField(label='User Name', max_length=100, strip=True)
 	class Meta:
 		model = Users
-		fields = ['firt_name', 'last_name', 'password', 'role', 'email']
+		fields = ['firt_name', 'last_name', 'password', 'role', 'email', 'user_name']
 		
 class Group(models.Model):
 	id = models.AutoField(primary_key=True)

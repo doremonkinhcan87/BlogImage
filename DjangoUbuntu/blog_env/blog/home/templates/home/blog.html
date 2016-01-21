@@ -163,18 +163,30 @@
 									</ul>
 								</nav>
 							</div>
-							<div class="container-fluid">
-								{% for document in documents %}
+							<div class="container-fluid">								
 								<table border=1 style="width: 100%; border-collapse: collapse">
+									{% for document in documents %}
 									<tr>
-										<td style="width:20%; padding: 5px;">{{ document.title }}</td>
-										<td style="width:50%; padding: 5px;"><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
-										<td style="width:20%; padding: 5px;"><img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px"></td>
-										<td style="width:5%; padding: 5px;"><a href="{% url 'home:update' id=document.id %}">Edit</a></td>
-										<td style="width:5%; padding: 5px;"><a href="{% url 'home:remove' id=document.id %}">Remove</a></td>
+										<td >{{ document.title }}</td>
+										<td >{{ document.users }}</td>
+										<td >{{ document.category }}</td>
+										<td >
+											<div id="menu">
+												<ul>
+												{% for image in document.tags.all %}
+													<li>{{ image.name }} &nbsp;</li>
+												{% endfor %}
+												</ul>
+											</div>
+										</td>
+										<td >{{ document.publish }}</td>
+										<td ><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
+										<td ><img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px"></td>
+										<td ><a href="{% url 'home:update' id=document.id %}">Edit</a></td>
+										<td ><a href="{% url 'home:remove' id=document.id %}">Remove</a></td>
 									</tr>
+									{% endfor %}
 								</table>
-								{% endfor %}
 							</div>
 						{% else %}
 							<p>No documents.</p>

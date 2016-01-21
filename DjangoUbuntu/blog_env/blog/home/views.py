@@ -61,24 +61,46 @@ def blog(request):
 		context_instance=RequestContext(request)
 	)
 	
+# def update_blog(request, id):
+	# try:
+		# selected_item = Document.objects.get(pk=id)
+		# form = DocumentForm(instance=selected_item)
+	# except Document.DoesNotExist:
+		# raise Http404("This item not exist.")
+	# if request.method == 'POST':
+		# form = DocumentForm(request.POST or None, request.FILES or None, instance=selected_item)
+		# if form.is_valid():
+			# form.save()
+			# return HttpResponseRedirect('/blog')
+	# documents = Document.objects.all()
+	# return render_to_response(
+		# 'home/blog.html',
+		# {'documents': documents, 'form': form},
+		# context_instance=RequestContext(request)
+	# )
+
 def update_blog(request, id):
+	data = {}
 	try:
 		selected_item = Document.objects.get(pk=id)
 		form = DocumentForm(instance=selected_item)
 	except Document.DoesNotExist:
 		raise Http404("This item not exist.")
 	if request.method == 'POST':
-		form = DocumentForm(request.POST or None, request.FILES or None, instance=selected_item)
+		form = DocumentForm(request.POST or None, request.FILES or None,instance=selected_item)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('/blog')
 	documents = Document.objects.all()
-	return render_to_response(
+	data['id'] = id
+	data['documents'] = documents
+	data['form'] = form
+	return render(
+		request,
 		'home/blog.html',
-		{'documents': documents, 'form': form},
-		context_instance=RequestContext(request)
+		data
 	)
-
+	
 def remove_blog(request, id):
 	try:
 		selected_item = Document.objects.get(pk=id)
@@ -242,7 +264,9 @@ def tags(request):
 		{'tags': tags, 'form': form},
 		context_instance=RequestContext(request)
 	)
+	
 def update_tags(request, id):
+	data = {}
 	try:
 		selected_item = Tags.objects.get(pk=id)
 		form = TagsForm(instance=selected_item)
@@ -254,10 +278,13 @@ def update_tags(request, id):
 			form.save()
 			return HttpResponseRedirect('/tags')
 	tags = Tags.objects.all()
-	return render_to_response(
+	data['id'] = id
+	data['tags'] = tags
+	data['form'] = form
+	return render(
+		request,
 		'home/tags.html',
-		{'tags': tags, 'form': form},
-		context_instance=RequestContext(request)
+		data
 	)
 
 def remove_tags(request, id):
@@ -294,6 +321,7 @@ def category(request):
 	)
 	
 def update_category(request, id):
+	data = {}
 	try:
 		selected_item = Category.objects.get(pk=id)
 		form = CategoryForm(instance=selected_item)
@@ -305,10 +333,13 @@ def update_category(request, id):
 			form.save()
 			return HttpResponseRedirect('/category')
 	categorys = Category.objects.all()
-	return render_to_response(
+	data['id'] = id
+	data['categorys'] = categorys
+	data['form'] = form
+	return render(
+		request,
 		'home/category.html',
-		{'categorys': categorys, 'form': form},
-		context_instance=RequestContext(request)
+		data
 	)
 
 def remove_category(request, id):
@@ -344,7 +375,9 @@ def group(request):
 		{'groups': groups, 'form': form},
 		context_instance=RequestContext(request)
 	)
+	
 def update_group(request, id):
+	data = {}
 	try:
 		selected_item = Group.objects.get(pk=id)
 		form = GroupForm(instance=selected_item)
@@ -356,10 +389,13 @@ def update_group(request, id):
 			form.save()
 			return HttpResponseRedirect('/group')
 	groups = Group.objects.all()
-	return render_to_response(
+	data['id'] = id
+	data['groups'] = groups
+	data['form'] = form
+	return render(
+		request,
 		'home/group.html',
-		{'groups': groups, 'form': form},
-		context_instance=RequestContext(request)
+		data
 	)
 
 def remove_group(request, id):

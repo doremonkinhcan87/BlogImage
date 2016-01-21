@@ -93,6 +93,7 @@
 								<td>{{ item.password }}</td>
 								<td>{{ item.role }}</td>
 								<td>{{ item.email }}</td>
+								<td>{{ item.user_name }}</td>
 								<td><a href="{% url 'home:update_item' id=item.id %}">Edit</a></td>
 								<td><a href="{% url 'home:remove_item' id=item.id %}">Remove</a></td>
 							</tr>

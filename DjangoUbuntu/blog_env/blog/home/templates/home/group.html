@@ -115,6 +115,15 @@
 								{% for group in groups %}
 							<tr>
 								<td>{{ group.name }}</td>
+								<td>
+									<div id="menu">
+										<ul>
+										{% for user in group.users.all %}
+											<li>{{ user.role }} &nbsp;</li>
+										{% endfor %}
+										</ul>
+									</div>
+								</td>
 								<td><a href="{% url 'home:update_group' id=group.id %}">Edit</a></td>
 								<td><a href="{% url 'home:remove_group' id=group.id %}">Remove</a></td>
 							</tr>
