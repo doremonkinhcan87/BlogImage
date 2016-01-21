@@ -18,6 +18,7 @@
 </head>
 <body>
 	<div id="wrapper">
+		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Admin</a>
@@ -27,10 +28,10 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#">ImageBlog</a>
+                            <a href="#">Blog</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/admin">Admin</a>
+                                    <a href="/blog">Blog</a>
                                 </li>
 								<li>
                                     <a href="/category">Category</a>
@@ -42,8 +43,12 @@
 							<a href="#">Users</a>
                             <ul class="nav nav-second-level">
 								<li>
-                                    <a href="/login">Login</a>
+									<a href="/group">Group</a>
                                 </li>
+								<li>
+                                    <a href="/users">Users</a>
+                                </li>
+
 								<li>
                                     <a href="/logout">Logout</a>
                                 </li>
@@ -61,13 +66,40 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="page-header">
+							<!--
 							<form action="{% url 'home:tags'%}" method="post">
 								{% csrf_token %}
 								{{form}}
 								<input type="submit" value="Submit" />
 							</form>
+							-->
+								{% if id == None %}
+							<form action="{% url 'home:tags' %}" method="post">
+								{% else %}
+							<form action="{% url 'home:update_tags' id=id %}" method="post">
+								{% endif %}
+								{% csrf_token %}
+							<p>
+								{{ form }}
+							</p>
+							<p>
+								<input type="submit" value="Submit" />
+							</p>
 						</div>
-					</form>
+						</form>
+						<!--Bang hien thi-->
+							{% if tags|length %}
+						<table border=1 style="width: 100%; border-collapse: collapse">
+								{% for tag in tags %}
+							<tr>
+								<td>{{ tag.name }}</td>
+								<td><a href="{% url 'home:update_tags' id=tag.id %}">Edit</a></td>
+								<td><a href="{% url 'home:remove_tags' id=tag.id %}">Remove</a></td>
+							</tr>
+								{% endfor %}
+						</table>
+							{% endif %}
+                    </div>
 				</div>
 			</div>
 		</div>

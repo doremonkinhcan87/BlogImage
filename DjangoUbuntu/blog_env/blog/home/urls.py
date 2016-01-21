@@ -9,32 +9,29 @@ urlpatterns = [
 		home_views.index,
 		name='index'),
 	url(
-		r'^admin$',
-		home_views.admin,
-		name='admin'),
+		r'^blog$',
+		home_views.blog,
+		name='blog'),
 	url(
 		r'^update/(?P<id>[\d]+)$',
-		home_views.update_admin,
+		home_views.update_blog,
 		name='update'),
 	url(
 		r'^remove/(?P<id>[\d]+)$',
-		home_views.remove_admin,
+		home_views.remove_blog,
 		name='remove'),
 	url(
 		r'^auth$',
 		home_views.auth,
 		name='auth'),
-	
 	url(
 		r'^media/(?P<path>.*)$', 
 		serve, 
-		{'document_root': settings.MEDIA_ROOT,}
-		),
-		
+		{'document_root': settings.MEDIA_ROOT,}),
 	url(
-		r'^login$',
-		home_views.login,
-		name='login'),
+		r'^users$',
+		home_views.users,
+		name='users'),
 	url(
 		r'^update_item/(?P<id>[\d]+)$',
 		home_views.update_item,
@@ -52,9 +49,37 @@ urlpatterns = [
 		home_views.tags,
 		name='tags'),
 	url(
+		r'^update_tags/(?P<id>[\d]+)$',
+		home_views.update_tags,
+		name='update_tags'),
+	url(
+		r'^remove_tags/(?P<id>[\d]+)$',
+		home_views.remove_tags,
+		name='remove_tags'),
+	url(
 		r'^category$',
 		home_views.category,
 		name='category'),
+	url(
+		r'^update_category/(?P<id>[\d]+)$',
+		home_views.update_category,
+		name='update_category'),
+	url(
+		r'^remove_category/(?P<id>[\d]+)$',
+		home_views.remove_category,
+		name='remove_category'),
+	url(
+		r'^group$',
+		home_views.group,
+		name='group'),
+	url(
+		r'^update_group/(?P<id>[\d]+)$',
+		home_views.update_group,
+		name='update_group'),
+	url(
+		r'^remove_group/(?P<id>[\d]+)$',
+		home_views.remove_group,
+		name='remove_group'),
 	url(
 		r'^test$',
 		home_views.test,

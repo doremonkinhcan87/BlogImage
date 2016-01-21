@@ -8,6 +8,8 @@ from home.models import Document
 from home.models import DocumentForm
 from home.models import Users
 from home.models import UsersForm
+from home.models import Group
+from home.models import GroupForm
 from home.models import Tags
 from home.models import TagsForm
 from home.models import Category
@@ -15,9 +17,9 @@ from home.models import CategoryForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
 
-def admin(request):
+def blog(request):
 	# Handle file upload
-	tags = Tags.objects.all()
+	#tags = Tags.objects.all()
 	s = request.session.get('users_id', None)
 	if not s:
 		return HttpResponseRedirect('/auth')
@@ -31,11 +33,12 @@ def admin(request):
 			newdoc.summary = request.POST['summary']
 			newdoc.content = request.POST['content']
 			newdoc.publish = request.POST['publish']
-			# newdoc.category_id = request.POST['category']
-			# newdoc.tags = tags.id
+			newdoc.category_id = request.POST['category']		
 			request.session['users_id'] = newdoc.users_id
+			newdoc = form.save(commit=False)
 			newdoc.save()
-			return HttpResponseRedirect('/admin')
+			form.save_m2m()
+			return HttpResponseRedirect('/blog')
 	else:
 		form = DocumentForm()  # A empty, unbound form
 	# Load documents for the index page
@@ -53,12 +56,12 @@ def admin(request):
 		
 	# Render index page with the documents and the form
 	return render_to_response(
-		'home/admin.html',
+		'home/blog.html',
 		{'documents': documents, 'form': form},
 		context_instance=RequestContext(request)
 	)
 	
-def update_admin(request, id):
+def update_blog(request, id):
 	try:
 		selected_item = Document.objects.get(pk=id)
 		form = DocumentForm(instance=selected_item)
@@ -68,15 +71,15 @@ def update_admin(request, id):
 		form = DocumentForm(request.POST or None, request.FILES or None, instance=selected_item)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/admin')
+			return HttpResponseRedirect('/blog')
 	documents = Document.objects.all()
 	return render_to_response(
-		'home/admin.html',
+		'home/blog.html',
 		{'documents': documents, 'form': form},
 		context_instance=RequestContext(request)
 	)
 
-def remove_admin(request, id):
+def remove_blog(request, id):
 	try:
 		selected_item = Document.objects.get(pk=id)
 		selected_item.delete()
@@ -84,7 +87,7 @@ def remove_admin(request, id):
 	except Document.DoesNotExist:
 		raise Http404("This item not exist.")
 	documents = Document.objects.all()
-	return HttpResponseRedirect('/admin')
+	return HttpResponseRedirect('/blog')
 
 def index(request):
 	# Handle file upload
@@ -127,7 +130,7 @@ def index(request):
 	)
 
 #trang tao user
-def login(request):
+def users(request):
 	form = UsersForm(request.POST)
 	s = request.session.get('users_id', None)
 	if not s:
@@ -144,7 +147,7 @@ def login(request):
 			users = Users.objects.get(email=email)
 			if users.email == email and check_password("password", password_password):	
 				request.session['users_id'] = users.id
-				return HttpResponseRedirect('/login')
+				return HttpResponseRedirect('/users')
 			else:
 				return HttpResponseRedirect('/auth')
 		except Users.DoesNotExist:
@@ -157,7 +160,7 @@ def login(request):
 	data['form'] = form
 	return render(
 		request,
-		'home/login.html',
+		'home/users.html',
 		data
 	)
    
@@ -172,14 +175,14 @@ def update_item(request, id):
        form = UsersForm(request.POST or None, instance=selected_item)
        if form.is_valid():
            form.save()
-           return HttpResponseRedirect('/login')
+           return HttpResponseRedirect('/users')
    list_item = Users.objects.all()
    data['id'] = id
    data['list_item'] = list_item
    data['form'] = form
    return render(
        request,
-       'home/login.html',
+       'home/users.html',
        data
    )
 
@@ -195,12 +198,12 @@ def remove_item(request, id):
    data['id'] = None
    data['list_item'] = list_item
    data['form'] = form
-   return HttpResponseRedirect('/login', data)
+   return HttpResponseRedirect('/users', data)
 
 def auth(request):
 	s = request.session.get('users_id',None)
 	if s:
-		return HttpResponseRedirect('/login')
+		return HttpResponseRedirect('/users')
 	if request.method == 'POST':
 		email = request.POST.get('email', None)
 		password = request.POST.get('password', None)
@@ -208,7 +211,7 @@ def auth(request):
 			users = Users.objects.get(email=email)
 			if users.email == email and users.password == password:	
 				request.session['users_id'] = users.id
-				return HttpResponseRedirect('/admin')
+				return HttpResponseRedirect('/blog')
 			else:
 				return HttpResponseRedirect('/auth')
 		except Users.DoesNotExist:
@@ -228,18 +231,45 @@ def tags(request):
 			newdoc = Tags()
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
-			request.session['users_id'] = users.id
+			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/tags')
 	else:
 		form = TagsForm()
-	documents = Tags.objects.all()
+	tags = Tags.objects.all()
+	return render_to_response(
+		'home/tags.html',
+		{'tags': tags, 'form': form},
+		context_instance=RequestContext(request)
+	)
+def update_tags(request, id):
+	try:
+		selected_item = Tags.objects.get(pk=id)
+		form = TagsForm(instance=selected_item)
+	except Tags.DoesNotExist:
+		raise Http404("This item not exist.")
+	if request.method == 'POST':
+		form = TagsForm(request.POST or None, instance=selected_item)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/tags')
+	tags = Tags.objects.all()
 	return render_to_response(
 		'home/tags.html',
 		{'tags': tags, 'form': form},
 		context_instance=RequestContext(request)
 	)
 
+def remove_tags(request, id):
+	try:
+		selected_item = Tags.objects.get(pk=id)
+		selected_item.delete()
+		form = TagsForm()
+	except Tags.DoesNotExist:
+		raise Http404("This item not exist.")
+	tags = Tags.objects.all()
+	return HttpResponseRedirect('/tags')
+	
 def category(request):
 	s = request.session.get('users_id', None)
 	if not s:
@@ -251,17 +281,97 @@ def category(request):
 			newdoc.users_id = request.POST['users']
 			newdoc.name = request.POST['name']
 			newdoc.description = request.POST['description']
-			request.session['users_id'] = users.id
+			request.session['users_id'] = newdoc.users_id
 			newdoc.save()
 			return HttpResponseRedirect('/category')
 	else:
 		form = CategoryForm()
-	documents = Category.objects.all()
+	categorys = Category.objects.all()
 	return render_to_response(
 		'home/category.html',
-		{'category': category, 'form': form},
+		{'categorys': categorys, 'form': form},
 		context_instance=RequestContext(request)
 	)
+	
+def update_category(request, id):
+	try:
+		selected_item = Category.objects.get(pk=id)
+		form = CategoryForm(instance=selected_item)
+	except Category.DoesNotExist:
+		raise Http404("This item not exist.")
+	if request.method == 'POST':
+		form = CategoryForm(request.POST or None, instance=selected_item)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/category')
+	categorys = Category.objects.all()
+	return render_to_response(
+		'home/category.html',
+		{'categorys': categorys, 'form': form},
+		context_instance=RequestContext(request)
+	)
+
+def remove_category(request, id):
+	try:
+		selected_item = Category.objects.get(pk=id)
+		selected_item.delete()
+		form = CategoryForm()
+	except Category.DoesNotExist:
+		raise Http404("This item not exist.")
+	categorys = Category.objects.all()
+	return HttpResponseRedirect('/category')
+
+def group(request):
+	s = request.session.get('users_id', None)
+	if not s:
+		return HttpResponseRedirect('/auth')
+	if request.method == 'POST':
+		form = GroupForm(request.POST)
+		if form.is_valid():
+			newdoc = Group()
+			newdoc.users_id = request.POST['users']
+			newdoc.name = request.POST['name']
+			request.session['users_id'] = newdoc.users_id
+			newdoc = form.save(commit=False)
+			newdoc.save()
+			form.save_m2m()
+			return HttpResponseRedirect('/group')
+	else:
+		form = GroupForm()
+	groups = Group.objects.all()
+	return render_to_response(
+		'home/group.html',
+		{'groups': groups, 'form': form},
+		context_instance=RequestContext(request)
+	)
+def update_group(request, id):
+	try:
+		selected_item = Group.objects.get(pk=id)
+		form = GroupForm(instance=selected_item)
+	except Group.DoesNotExist:
+		raise Http404("This item not exist.")
+	if request.method == 'POST':
+		form = GroupForm(request.POST or None, instance=selected_item)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/group')
+	groups = Group.objects.all()
+	return render_to_response(
+		'home/group.html',
+		{'groups': groups, 'form': form},
+		context_instance=RequestContext(request)
+	)
+
+def remove_group(request, id):
+	try:
+		selected_item = Group.objects.get(pk=id)
+		selected_item.delete()
+		form = GroupForm()
+	except Group.DoesNotExist:
+		raise Http404("This item not exist.")
+	groups = Group.objects.all()
+	return HttpResponseRedirect('/group')
+	
 def logout(request):
 	try:
 		del request.session['users_id']

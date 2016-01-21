@@ -15,6 +15,20 @@
 	<link rel="stylesheet" href="/media/src/css/main.css">
 	<link rel="stylesheet" href="/media/src/css/sb-admin-2.css">
 	<meta charset="utf-8">
+	<style>
+		#menu ul{
+			list-style-type:none;
+			padding:0px;
+			margin:0px;
+			}
+		 
+		#menu ul li{
+			display:inline;
+			float:left;
+			text-align:center;
+			text-decoration:none;
+			}
+	</style>
 </head>
 <body>
 	<div id="wrapper">
@@ -67,13 +81,28 @@
                     <div class="col-lg-12">
                         <div class="page-header">
 								{% if id == None %}
-							<form action="{% url 'home:category' %}" method="post">
+							<form action="{% url 'home:group' %}" method="post">
 								{% else %}
-							<form action="{% url 'home:update_category' id=id %}" method="post">
+							<form action="{% url 'home:update_group' id=id %}" method="post">
 								{% endif %}
 								{% csrf_token %}
 							<p>
-								{{ form }}
+								<table border=1 style="width: 100%; border-collapse: collapse">
+									<tr>
+										<td>Name</td>
+										<td>{{ form.name }}</td>
+									</tr>
+									<tr>
+										<td><label>Users</label></td>
+										<td>
+											<div id="menu">
+												<ul>
+													<li>{{ form.users }}</li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+								</table>
 							</p>
 							<p>
 								<input type="submit" value="Submit" />
@@ -81,19 +110,20 @@
 						</div>
 						</form>
 						<!--Bang hien thi-->
-							{% if categorys|length %}
+							{% if groups|length %}
 						<table border=1 style="width: 100%; border-collapse: collapse">
-								{% for category in categorys %}
+								{% for group in groups %}
 							<tr>
-								<td>{{ category.name }}</td>
-								<td><a href="{% url 'home:update_category' id=category.id %}">Edit</a></td>
-								<td><a href="{% url 'home:remove_category' id=category.id %}">Remove</a></td>
+								<td>{{ group.name }}</td>
+								<td><a href="{% url 'home:update_group' id=group.id %}">Edit</a></td>
+								<td><a href="{% url 'home:remove_group' id=group.id %}">Remove</a></td>
 							</tr>
 								{% endfor %}
 						</table>
 							{% endif %}
                     </div>
 				</div>
+			</div>
 		</div>
 				<!-- /.col-lg-12 -->
 		</div>

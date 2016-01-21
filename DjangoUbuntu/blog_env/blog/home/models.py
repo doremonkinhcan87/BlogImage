@@ -17,7 +17,6 @@ class Users(models.Model):
 	def __str__(self):
 		return self.role
 		
-		
 class UsersForm(forms.ModelForm):
 	firt_name = forms.CharField(label='Firt Name', max_length=100, strip=True)
 	last_name = forms.CharField(label='Last Name', max_length=100, strip=True)
@@ -27,6 +26,27 @@ class UsersForm(forms.ModelForm):
 	class Meta:
 		model = Users
 		fields = ['firt_name', 'last_name', 'password', 'role', 'email']
+		
+class Group(models.Model):
+	id = models.AutoField(primary_key=True)
+	users = models.ManyToManyField(Users, related_name="users_ids")
+	name = models.CharField(max_length=256)
+	class Meta:
+		db_table = 'blog_group'
+		ordering = ['-id']
+	def __str__(self):
+		return self.name
+		
+class GroupForm(forms.ModelForm):
+	name = forms.CharField(label='Name')
+	users = models.ManyToManyField(Users)
+	class Meta:
+		model = Group
+		fields = ['users', 'name']
+		widgets = {
+			'body': forms.Textarea(),
+			'users': forms.CheckboxSelectMultiple()
+			}
 		
 class Tags(models.Model):
 	id = models.AutoField(primary_key=True)
