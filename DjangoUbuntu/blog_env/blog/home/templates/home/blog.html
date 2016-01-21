@@ -28,6 +28,12 @@
 			text-align:center;
 			text-decoration:none;
 			}
+		.table-tr{
+			width: 100px; margin: auto;
+		}
+		.table-th{
+			text-align: center;
+		}
 	</style>
 </head>
 
@@ -165,27 +171,42 @@
 							</div>
 							<div class="container-fluid">								
 								<table border=1 style="width: 100%; border-collapse: collapse">
-									{% for document in documents %}
-									<tr>
-										<td >{{ document.title }}</td>
-										<td >{{ document.users }}</td>
-										<td >{{ document.category }}</td>
-										<td >
-											<div id="menu">
-												<ul>
-												{% for image in document.tags.all %}
-													<li>{{ image.name }} &nbsp;</li>
-												{% endfor %}
-												</ul>
-											</div>
-										</td>
-										<td >{{ document.publish }}</td>
-										<td ><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
-										<td ><img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px"></td>
-										<td ><a href="{% url 'home:update' id=document.id %}">Edit</a></td>
-										<td ><a href="{% url 'home:remove' id=document.id %}">Remove</a></td>
-									</tr>
-									{% endfor %}
+									<thead>
+										<tr class="table-tr">
+											<th class="table-th">Title</th>
+											<th class="table-th">Users</th>
+											<th class="table-th">Category</th>
+											<th class="table-th">Tags</th>
+											<th class="table-th">Publish</th>
+											<th class="table-th">Links</th>
+											<th class="table-th">Image</th>
+											<th class="table-th">Edit</th>
+											<th class="table-th">Remove</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for document in documents %}
+										<tr class="table-tr">
+											<td >{{ document.title }}</td>
+											<td class="table-th">{{ document.users }}</td>
+											<td class="table-th">{{ document.category }}</td>
+											<td >
+												<div id="menu">
+													<ul>
+													{% for image in document.tags.all %}
+														<li>{{ image.name }} &nbsp;</li>
+													{% endfor %}
+													</ul>
+												</div>
+											</td>
+											<td class="table-th">{{ document.publish }}</td>
+											<td ><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
+											<td class="table-th"><img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px"></td>
+											<td class="table-th"><a href="{% url 'home:update' id=document.id %}">Edit</a></td>
+											<td class="table-th"><a href="{% url 'home:remove' id=document.id %}">Remove</a></td>
+										</tr>
+										{% endfor %}
+									</tbody>
 								</table>
 							</div>
 						{% else %}
