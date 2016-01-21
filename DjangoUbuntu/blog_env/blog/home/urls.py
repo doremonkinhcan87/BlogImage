@@ -81,7 +81,16 @@ urlpatterns = [
 		home_views.remove_group,
 		name='remove_group'),
 	url(
+		r'^signup$',
+		home_views.signup,
+		name='signup'),
+	url(
+		r'^success$',
+		home_views.success,
+		name='success'),
+	url(
 		r'^test$',
 		home_views.test,
 		name='test'),
+	
 ]

@@ -417,7 +417,31 @@ def logout(request):
 		request,
 		'home/auth.html'
 		)
-
+		
+def signup(request):
+	data = {}
+	if request.method == 'POST':
+		form = UsersForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/success')
+	else:
+		form = UsersForm()
+	list_item = Users.objects.all()
+	data['id'] = None
+	data['list_item'] = list_item
+	data['form'] = form
+	return render(
+		request,
+		'home/signup.html',
+		data
+	)
+	
+def success(request):
+	return render(
+		request,
+		'home/success.html'
+	)
 def test(request):
 	return render(
 		request,

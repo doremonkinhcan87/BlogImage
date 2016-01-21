@@ -10,7 +10,7 @@ class Users(models.Model):
 	last_name = models.CharField(max_length=256)
 	user_name = models.CharField(max_length=256, default="")
 	password = models.CharField(max_length=256)
-	role = models.CharField(max_length=256)
+	role = models.CharField(max_length=256,)
 	email = models.CharField(max_length=256, default="")
 	class Meta:
 		db_table = "blog_users"
