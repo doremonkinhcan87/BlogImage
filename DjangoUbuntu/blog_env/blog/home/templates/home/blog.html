@@ -187,10 +187,10 @@
 									<tbody>
 										{% for document in documents %}
 										<tr class="table-tr">
-											<td >{{ document.title }}</td>
+											<td style="padding-left: 5px;">{{ document.title }}</td>
 											<td class="table-th">{{ document.users }}</td>
 											<td class="table-th">{{ document.category }}</td>
-											<td >
+											<td style="padding-left: 5px;">
 												<div id="menu">
 													<ul>
 													{% for image in document.tags.all %}
@@ -200,7 +200,7 @@
 												</div>
 											</td>
 											<td class="table-th">{{ document.publish }}</td>
-											<td ><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
+											<td style="padding-left: 5px;"><a href="/media/{{ document.docfile.url }}">{{ document.docfile.name }}</a></td>
 											<td class="table-th"><img src="/media/{{ document.docfile.url }}" style="height: 120px; width: 120px"></td>
 											<td class="table-th"><a href="{% url 'home:update' id=document.id %}">Edit</a></td>
 											<td class="table-th"><a href="{% url 'home:remove' id=document.id %}">Remove</a></td>
