@@ -20,6 +20,7 @@
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 {% block title %}{% trans "translation test" %}{% endblock %}
 {% get_available_languages as LANGUAGES %}
+
     <form action="/i18n/setlang/" method="post">{% csrf_token %}
       <input name="next" type="hidden" value="/" />
         {% csrf_token %}

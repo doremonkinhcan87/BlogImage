@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 
 from home.models import Document
@@ -16,6 +16,7 @@ from home.models import Category
 from home.models import CategoryForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def blog(request):
 	# Handle file upload
@@ -448,3 +449,16 @@ def test(request):
 		'home/test.html'
 		)
 
+def search(request): 
+	query = request.GET.get('q', '')
+	if query:
+		qset = (
+			Q(name__icontains=query)
+			)
+		results = Tags.objects.filter(qset).distinct()
+	else:
+		results = []
+	return render_to_response("home/search.html", {
+		"results": results,
+		"query": query
+	})

@@ -92,5 +92,8 @@ urlpatterns = [
 		r'^test$',
 		home_views.test,
 		name='test'),
-	
+	url(
+		r'^search$',
+		home_views.search,
+		name='search'),
 ]

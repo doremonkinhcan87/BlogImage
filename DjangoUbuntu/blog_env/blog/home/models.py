@@ -120,4 +120,3 @@ class DocumentForm(forms.ModelForm):
 			'tags': forms.CheckboxSelectMultiple()
 			}
 
-
