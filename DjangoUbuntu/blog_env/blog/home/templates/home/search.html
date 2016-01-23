@@ -1,0 +1,16 @@
+<html>
+        <head>
+            <title>Search for Rats</title>
+        </head>
+    <body>
+        <form action="/search" method="get">
+            <input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
+    </body>
+	<div>You searched for: {{ query }} </div>
+	<div>You searched for: {{ results }} </div>
+	{% for result in results %}
+           <p>{{result}}</p>
+     {% endfor %}
+</html>
