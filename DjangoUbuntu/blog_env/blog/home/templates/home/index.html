@@ -3,7 +3,8 @@
     <head>
 		<link href="/media/src/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link href="/media/src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/media/src/bootstrap/css/bootstrap.css" rel="stylesheet">
+		
+		<script src="/media/src/bootstrap/js/bootstrap.min.js"></script>
 		<script src="/media/src/bootstrap/js/bootstrap.js"></script>
 		<link rel="stylesheet" href="/media/src/css/main.css">
         <meta charset="utf-8">
@@ -30,8 +31,20 @@
 						</ul>
 					</nav>
 					<nav class="collapse navbar-collapse navbar-main navbar-right">
-						<ul class="navbar-nav navbar-right nav">
-							<li><a href="#" style = "color: #777">Explore</a></li>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a style = "color: #777" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="/industrial">Industrial</a></li>
+									<li><a href="/flowers_trees">Flowers & Trees</a></li>
+									<li><a href="/people_families">People & Families</a></li>
+									<li><a href="/automotives">Automotives</a></li>
+									<li><a href="/architecture">Architecture</a></li>
+									<li><a href="/fashion_beauty">Fashion & Beauty</a></li>
+									<li><a href="/nature">Nature</a></li>
+									<li><a href="/other">Other</a></li>
+								</ul>
+							</li>
 							<li><a href="/signup">Sign up</a></li>
 							<li><a href="/auth">Log in</a></li>
 						</ul>
@@ -40,57 +53,170 @@
 			</nav>
 		</div> 
 		<div class="container">
-			<div class="masthead" >
-				<nav>
-					<ul class="nav nav-justified">
-						<li class="active"><a href="#">Photos</a></li>
-						<li><a href="#">Illustrations</a></li>
-						<li><a href="#">Vector graphics</a></li>
-						<li><a href="#">Videos</a></li>
-
-					</ul>
-				</nav>
-			</div>
+			<form class="navbar-form" style="text-align: center;" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
 		</div>
 		
         <!-- List of uploaded documents -->
-		{% if posts %}
-			<div class="container-fluid">
-				{% for post in posts.object_list %}
-					<div class="col-md-2">
-						<div id="items" class="thumbnail" >
-							<div class="item" style="background:url('/media/{{ post.docfile.url }}') center center; background-size:cover; height:200px">
-								<div class="info">
-									<p>{{ post.title }}<br/>{{ post.pub_date }}</p>
+		{% if documents %}
+			<div class="container">		
+				{% for category in categorys %}
+				<div class="panel panel-default">
+					{%if category.id == 4%}
+					<div class="panel-heading"><a href="/industrial" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a1 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
+							{%endif%}
+						{% endfor %}
 					</div>
-					{{ post.body|truncatewords:80 }}
+					{%endif%}
+					{%if category.id == 5%}
+					<div class="panel-heading"><a href="/flowers_trees" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a2 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>
+					{%endif%}
+					{%if category.id == 6%}
+					<div class="panel-heading"><a href="/people_families" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a3 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>
+					{%endif%}
+					{%if category.id == 7%}
+					<div class="panel-heading"><a href="/automotives" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a4 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>
+					{%endif%}
+					{%if category.id == 8%}
+					<div class="panel-heading"><a href="/architecture" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a5 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>
+					{%endif%}
+					{%if category.id == 9%}
+					<div class="panel-heading"><a href="/fashion_beauty" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a6 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>
+					{%endif%}
+					{%if category.id == 14%}
+					<div class="panel-heading"><a href="/nature" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a7 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>
+					{%endif%}
+					{%if category.id == 15%}
+					<div class="panel-heading"><a href="/other" >{{ category.name }}</a></div>
+					<div class="panel-body">
+						{% for document in a8 %}
+							{%if category.id == document.category_id %}
+							<div class="col-md-4">
+								<div id="items" class="thumbnail" >
+									<div class="item" style="background:url('/media/{{ document.docfile.url }}') center center; background-size:cover; height:200px">
+										<div class="info">
+											<p>{{ document.title }}<br/>{{ document.pub_date }}<br/>By {{ document.users }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%endif%}
+						{% endfor %}
+					</div>		
+					{%endif%}
+				</div>
 				{% endfor %}
-			</div>
-			<div class="container-fluid">
-				<nav style=" text-align: center;">
-					<ul class="pagination">
-						{% if posts.has_previous %}
-						  <li><a href="?page={{ posts.previous_page_number }}"><<</a></li>
-					  {% endif %}
-					  {% for pg in posts.paginator.page_range %}
-						  {% if posts.number == pg %}
-							  <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
-						  {% else %}
-							  <li><a href="?page={{ pg }}">{{ pg }}</a></li>
-						  {% endif %}
-					  {% endfor %}
-					  {% if posts.has_next %}
-						  <li><a href="?page={{ posts.next_page_number }}">>></a></li>
-					  {% endif %}
-					
-					</ul>
-				</nav>
 			</div>
 		{% else %}
             <p>No documents</p>
 		{% endif %}
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </body>
 </html>

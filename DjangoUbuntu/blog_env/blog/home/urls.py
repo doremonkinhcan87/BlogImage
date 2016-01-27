@@ -7,7 +7,7 @@ urlpatterns = [
 	url(
 		r'^$',
 		home_views.index,
-		name='index'),
+		name='index'),	
 	url(
 		r'^blog$',
 		home_views.blog,
@@ -96,4 +96,36 @@ urlpatterns = [
 		r'^search$',
 		home_views.search,
 		name='search'),
+	url(
+		r'^industrial$',
+		home_views.industrial,
+		name='industrial'),
+	url(
+		r'^people_families$',
+		home_views.people_families,
+		name='people_families'),	
+	url(
+		r'^flowers_trees$',
+		home_views.flowers_trees,
+		name='flowers_trees'),
+	url(
+		r'^automotives$',
+		home_views.automotives,
+		name='automotives'),
+	url(
+		r'^architecture$',
+		home_views.architecture,
+		name='architecture'),	
+	url(
+		r'^fashion_beauty$',
+		home_views.fashion_beauty,
+		name='fashion_beauty'),
+	url(
+		r'^nature$',
+		home_views.nature,
+		name='nature'),
+	url(
+		r'^other$',
+		home_views.other,
+		name='other'),
 ]

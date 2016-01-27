@@ -61,24 +61,6 @@ def blog(request):
 		{'documents': documents, 'form': form},
 		context_instance=RequestContext(request)
 	)
-	
-# def update_blog(request, id):
-	# try:
-		# selected_item = Document.objects.get(pk=id)
-		# form = DocumentForm(instance=selected_item)
-	# except Document.DoesNotExist:
-		# raise Http404("This item not exist.")
-	# if request.method == 'POST':
-		# form = DocumentForm(request.POST or None, request.FILES or None, instance=selected_item)
-		# if form.is_valid():
-			# form.save()
-			# return HttpResponseRedirect('/blog')
-	# documents = Document.objects.all()
-	# return render_to_response(
-		# 'home/blog.html',
-		# {'documents': documents, 'form': form},
-		# context_instance=RequestContext(request)
-	# )
 
 def update_blog(request, id):
 	data = {}
@@ -113,13 +95,6 @@ def remove_blog(request, id):
 	return HttpResponseRedirect('/blog')
 
 def index(request):
-	# Handle file upload
-	# s = request.session.get('users_id', None)
-	# if not s:
-		# return render(
-				# request,
-				# 'home/index.html'
-			# )
 	if request.method == 'POST':
 		form = DocumentForm(request.POST, request.FILES)
 		if form.is_valid():
@@ -133,22 +108,39 @@ def index(request):
 		form = DocumentForm()
 		
 	documents = Document.objects.all()
-	posts_list = Document.objects.all()
-
-	paginator = Paginator(posts_list, 12)
-
-	try:
-		page = int(request.GET.get('page', '1'))
-	except:
-		page = 1
-
-	try:
-		posts = paginator.page(page)
-	except(EmptyPage, InvalidPage):
-		posts = paginator.page(paginator.num_pages)
+	categorys = Category.objects.all()
+	a1 = []
+	a2 = []
+	a3 = []
+	a4 = []
+	a5 = []
+	a6 = []
+	a7 = []
+	a8 = []
+	for i in range(len(categorys)):
+		for j in range(len(documents)):
+			if categorys[i].id == documents[j].category_id:
+				if categorys[i].id == 4:
+					a1.append(documents[j])
+				elif categorys[i].id == 5:
+					a2.append(documents[j])
+				elif categorys[i].id == 6:
+					a3.append(documents[j])
+				elif categorys[i].id == 7:
+					a4.append(documents[j])
+				elif categorys[i].id == 8:
+					a5.append(documents[j])
+				elif categorys[i].id == 9:
+					a6.append(documents[j])
+				elif categorys[i].id == 14:
+					a7.append(documents[j])
+				else:
+					a8.append(documents[j])
+			
 	return render_to_response(
 		'home/index.html',
-		{'documents': documents, 'form': form,'posts': posts,},
+		{'documents': documents, 'form': form, 'categorys': categorys,
+		'a1':a1[:6], 'a2':a2[:6], 'a3':a3[:6], 'a4':a4[:6], 'a5':a5[:6], 'a6':a6[:6], 'a7':a7[:6], 'a8':a8[:6]},
 		context_instance=RequestContext(request)
 	)
 
@@ -462,3 +454,74 @@ def search(request):
 		"results": results,
 		"query": query
 	})
+
+def industrial(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/industrial.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+def people_families(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/people_families.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+
+def flowers_trees(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/flowers_trees.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+
+def automotives(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/automotives.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+
+def architecture(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/architecture.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+
+def fashion_beauty(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/fashion_beauty.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+
+def nature(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/nature.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)
+
+def other(request):
+	documents = Document.objects.all()
+	categorys = Category.objects.all()	
+	return render_to_response(
+		'home/other.html',
+		{'documents': documents,'categorys': categorys},
+		context_instance=RequestContext(request)
+	)

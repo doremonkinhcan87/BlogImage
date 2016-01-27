@@ -11,6 +11,6 @@
 	<div>You searched for: {{ query }} </div>
 	<div>You searched for: {{ results }} </div>
 	{% for result in results %}
-           <p>{{result}}</p>
-     {% endfor %}
+		<p>{{result.title}}</p>
+    {% endfor %}
 </html>
